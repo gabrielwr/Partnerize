@@ -1,0 +1,29 @@
+{
+  "name": "ClimbingPartnerFinder",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "run-build": "nodemon --watch server -e js,html server/api.js"
+  },
+  "dependencies": {
+    "firebase": "^3.9.0",
+    "nodemon": "^1.11.0",
+    "react": "16.0.0-alpha.6",
+    "react-native": "0.43.4",
+    "react-native-gifted-chat": "^0.1.4",
+    "react-navigation": "git+https://github.com/react-community/react-navigation.git",
+    "socket.io": "^1.7.3",
+    "socket.io-client": "^1.7.3"
+  },
+  "devDependencies": {
+    "babel-jest": "19.0.0",
+    "babel-preset-react-native": "1.9.1",
+    "jest": "19.0.2",
+    "react-test-renderer": "16.0.0-alpha.6"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
