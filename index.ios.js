@@ -2,15 +2,23 @@ import { ClimbingPartnerFinder } from './app/components/App'
 
 import * as firebase from 'firebase';
 
-const firebaseConfig = {
-  apiKey: "<your-api-key>",
-  authDomain: "<your-auth-domain>",
-  databaseURL: "<your-database-url>",
-  storageBucket: "<your-storage-bucket>",
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyAURCLQHPFsI_Qq4xwWAlojh-mDTT140UI",
+  authDomain: "climbingpartnerfinder-3408a.firebaseapp.com",
+  databaseURL: "https://climbingpartnerfinder-3408a.firebaseio.com",
+  projectId: "climbingpartnerfinder-3408a",
+  storageBucket: "climbingpartnerfinder-3408a.appspot.com",
+  messagingSenderId: "411324617562"
 };
 
+firebase.initializeApp(config);
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+// // Create a reference with .ref() instead of new Firebase(url)
+const rootRef = firebase.database().ref();
+const itemsRef = rootRef.child('items');
+
 
 // /**
 //  * Sample React Native App

@@ -48,7 +48,7 @@ export class AllPartners extends React.Component {
     );
   }
 
-  distance(lat1, lon1, lat2, lon2, unit) {
+  returnDistanceInMiles(lat1, lon1, lat2, lon2, unit) {
     let radlat1 = Math.PI * lat1/180
     let radlat2 = Math.PI * lat2/180
     let theta = lon1-lon2
@@ -72,7 +72,7 @@ export class AllPartners extends React.Component {
   }
 
   static navigationOptions = {
-    title: 'Partners Nearby:',
+    title: 'Nearby Partners:',
   };
 
   //in on press, should set up socket connection

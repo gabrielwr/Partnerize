@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 
 import SocketIOClient from 'socket.io-client';
+import * as firebase from 'firebase';
 
 //Chat lib
 import { GiftedChat } from 'react-native-gifted-chat';

@@ -5,9 +5,10 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "run-build": "nodemon --watch server -e js,html server/api.js"
+    "start-server": "nodemon --watch server -e js,html server/api.js"
   },
   "dependencies": {
+    "express": "^4.15.2",
     "firebase": "^3.9.0",
     "nodemon": "^1.11.0",
     "react": "16.0.0-alpha.6",
