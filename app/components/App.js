@@ -16,7 +16,7 @@ import { AllPartners } from './AllPartners'
 import { Geolocation } from './Geolocation'
 import { Message } from './Message'
 
-const ClimbingPartnerFinder = StackNavigator({
+export const ClimbingPartnerFinder = StackNavigator({
   Home: { screen: HomeScreen },
   Find: { screen: FindPartner },
   Geolocator: { screen: Geolocation },

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
-
 export class Geolocation extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +13,7 @@ export class Geolocation extends Component {
   }
 
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition(
+    this.watchId = navigator.geolocation.watchPosition(
       (position) => {
         this.setState({
           latitude: position.coords.latitude,
@@ -23,8 +22,12 @@ export class Geolocation extends Component {
         });
       },
       (error) => this.setState({ error: error.message }),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10 },
     );
+  }
+
+  componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.watchId);
   }
 
   render() {

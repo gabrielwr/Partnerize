@@ -20,15 +20,19 @@ export class Message extends React.Component {
       userId: null
     }
 
+    console.log('messages:', this.props.navigation.state.params.user.name)
     //class method binding
     this.onSend = this.onSend.bind(this);
 
     // this.socket = SocketIOClient('http://localhost:3000');
+    // let user = this.props.navigation.state.params.user.name
   }
-
-  static navigationOptions = {
-    title: `Message with placeholder name using props`,
-  };
+  static navigationOptions = ({ navigation }) => ({
+    title: `Chat with ${navigation.state.params.user.name}`,
+  });
+  // static navigationOptions = {
+  //   // title: `Chat with ${this.props.navigation.state.params.user.name}`
+  // };
 
   componentWillMount() {
     this.setState({
