@@ -15,13 +15,15 @@ import { FindPartner } from './FindPartner'
 import { AllPartners } from './AllPartners'
 import { Geolocation } from './Geolocation'
 import { Message } from './Message'
+import { User } from './User'
 
 export const ClimbingPartnerFinder = StackNavigator({
   Home: { screen: HomeScreen },
   Find: { screen: FindPartner },
   Geolocator: { screen: Geolocation },
   AllPartners: { screen: AllPartners },
-  Message: { screen: Message }
+  Message: { screen: Message },
+  User: { screen: User }
 });
 
 AppRegistry.registerComponent('ClimbingPartnerFinder', () => ClimbingPartnerFinder);

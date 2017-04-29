@@ -20,27 +20,22 @@ export class Message extends React.Component {
       userId: null
     }
 
-    console.log('messages:', this.props.navigation.state.params.user.name)
     //class method binding
     this.onSend = this.onSend.bind(this);
-
-    // this.socket = SocketIOClient('http://localhost:3000');
-    // let user = this.props.navigation.state.params.user.name
   }
+
   static navigationOptions = ({ navigation }) => ({
     title: `Chat with ${navigation.state.params.user.name}`,
   });
-  // static navigationOptions = {
-  //   // title: `Chat with ${this.props.navigation.state.params.user.name}`
-  // };
 
   componentWillMount() {
+    console.log(this.props)
     this.setState({
       messages: [
         {
           _id: 1,
           text: 'Do you even lift?',
-          createdAt: new Date(Date.UTC(2016, 7, 30, 17, 20, 0)),
+          createdAt: new Date(),
           user: {
             _id: 2,
             name: 'React Native',
@@ -51,14 +46,21 @@ export class Message extends React.Component {
     });
   }
 
+  onAvatarPress() {
+    console.log('made it here')
+    this.props.navigation.navigate('User');
+  }
+
   onSend(messages = []) {
-    this.setState((previousState) => {
+    this.setState( previousState => {
       return {
         messages: GiftedChat.append(previousState.messages, messages),
       }
     });
   }
+
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <GiftedChat
         messages={this.state.messages}
@@ -66,26 +68,11 @@ export class Message extends React.Component {
         user={{
           _id: 1,
         }}
+        onClick={this.onAvatarPress}
       />
     );
   }
 }
-//   render() {
-//     const { navigate } = this.props.navigation;
-//     return (
-//       <View>
-//         <Text> SUP BRODUDE?! </Text>
-//       </View>
-//     )
-//   }
-// }
-
-// socket.on('message', (message) => {
-//   var oldMessages = this.state.messages;
-//   // React will automatically rerender the component when a new message is added.
-//   this.setState({ messages: oldMessages.concat(message) });
-// });
-
 
 
 

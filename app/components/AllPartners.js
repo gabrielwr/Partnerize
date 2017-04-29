@@ -1,9 +1,21 @@
 import React from 'react';
 import {
-  Text,
   View,
   Button
 } from 'react-native';
+
+import {
+  Container,
+  Content,
+  Spinner,
+  List,
+  ListItem,
+  Text,
+  Right,
+  Icon,
+  Thumbnail,
+  Body
+} from 'native-base';
 
 //firebase imports
 import { firebaseApp } from '../../firebase'
@@ -17,8 +29,6 @@ export class AllPartners extends React.Component {
       lat: null,
       long: null,
       error: null,
-      dataSource: null,
-      peopleAndCoordsArr: [],
       nearbyPeople: []
     };
 
@@ -26,63 +36,38 @@ export class AllPartners extends React.Component {
     this.dbRef = firebaseApp.database().ref('users')
   }
 
+  static navigationOptions = {
+    title: 'Nearby',
+  };
+
   componentDidMount() {
+    console.log('hitting did Mount')
+    this.getCurrentCoords();
+    this.listenForCoords();
+  }
 
-
-    //figure out what this event listener does and where to put it
-    // this.dbRef.on("child_added", function(snapshot, prevChildKey) {
-
-    //receive all users data from firebase
-    // this.dbRef.on("value", function(snapshot) {
-    //   var newPost = snapshot.val();
-    //   console.log('newPost:', newPost);
-    // });
-
-
-    console.log('we are back from listen for coords')
-
+  getCurrentCoords() {
     //get current users current position
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.setState({
-          lat: position.coords.latitude,
-          long: position.coords.longitude,
-          error: null,
-        });
+    navigator.geolocation.getCurrentPosition( position => {
+      if(this.state.lat !== position.coords.latitude || this.state.long !== position.coords.longitude ) {
+          console.log('state is diff')
+          this.setState({
+            lat: position.coords.latitude,
+            long: position.coords.longitude,
+            error: null,
+          });
+        }
       },
       (error) => this.setState({ error: error.message }),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+      { enableHighAccuracy: true, timeout: 2000, maximumAge: 1000 },
     );
-
-    //post the current users data to firebase
-    //how does this work?
-    // var newPostRef = this.dbRef.push();
-    // newPostRef.set({
-    //   lat: this.state.latitude,
-    //   long: this.state.longitude
-    // })
-    //
-    this.listenForCoords();
-
   }
 
-  componentWillUnmount() {
-    this.setState({
-      lat: null,
-      long: null,
-      error: null,
-      dataSource: null,
-      peopleAndCoordsArr: [],
-      nearbyPeople: []
-    })
-  }
 
   listenForCoords() {
     this.dbRef.on('value', (snapshot) => {
-      console.log('listening for coords:', snapshot.val())
       var coordsArr = [];
       snapshot.forEach((child) => {
-        console.log('child in iterator', child.val())
         coordsArr.push({
           name: child.val().name,
           _key: child.key,
@@ -91,21 +76,12 @@ export class AllPartners extends React.Component {
         });
       });
 
-      //set state
-      this.setState({
-        // what does this data source do?
-        // dataSource: this.state.dataSource.cloneWithRows(coordsArr)
-        peopleAndCoordsArr: coordsArr
-      })
-
-      // console.log('state', this.state)
-      this.findNearbyPartner();
+      this.findNearbyPartner(coordsArr);
     })
   }
 
 
   returnDistanceInMiles(lat1, lon1, lat2, lon2, unit) {
-    // console.log('made it:', lat1, lat2)
     let radlat1 = Math.PI * lat1/180
     let radlat2 = Math.PI * lat2/180
     let theta = lon1-lon2
@@ -117,103 +93,104 @@ export class AllPartners extends React.Component {
     if (unit === "K") { dist *= 1.609344 }
     if (unit === "N") { dist *= 0.8684 }
 
-    console.log(dist)
-    return dist
+    return dist;
   }
 
-  findNearbyPartner() {
-    console.log('curr long and lat:', this.state.long, this.state.lat)
-    console.log('made it to findNearby')
+  findNearbyPartner(coordsArr) {
     // filter by nearby and then sort by closest
-    var filtered = this.state.peopleAndCoordsArr.filter( personObj => {
-      console.log('curr personObj is:', personObj)
-      return this.returnDistanceInMiles(personObj.lat,
-                                        personObj.long,
-                                        this.state.lat,
-                                        this.state.long,
-                                        'N') <= 1;
+    var filtered = coordsArr.filter( personObj => {
+      return this.returnDistanceInMiles(personObj.lat,personObj.long,this.state.lat,this.state.long,'N') <= 1
     })
-
 
     this.setState({
       nearbyPeople: filtered
     })
-    console.log('people closeby are:', this.state.nearbyPeople);
+    console.log('findNearby: set');
   }
 
-  static navigationOptions = {
-    title: 'Nearby',
-  };
 
-  //in on press, should set up socket connection
+
   render() {
     const { navigate } = this.props.navigation;
-    console.log('in render:',this.state.nearbyPeople)
+    console.log('render: nearbyPeople', this.state.nearbyPeople)
     return (
-      <View>
-        {this.state.nearbyPeople && this.state.nearbyPeople.map( personObj => {
+      <Container>
+        <Content>
+        {!this.state.nearbyPeople.length ? <Spinner color='blue' /> : this.state.nearbyPeople.map( personObj => {
           return (
-            <View key={ personObj.name }>
-            <Text> { personObj.name } </Text>
-            <Button
-              onPress={ () => {
-                navigate('Message', { user: personObj })
-              }}
-              title="Chat"
-            />
-          </View>
+            <List key={personObj.name}>
+            <ListItem>
+              <Thumbnail square size={40} source={{uri:'https://placegoat.com/200'}} />
+              <Body>
+              <Text>{ personObj.name }</Text>
+              </Body>
+              <Right>
+                <Icon style={{color: 'steelblue'}} name='arrow-forward' onPress={ () => {
+                  navigate('Message', { user: personObj })
+                }}/>
+              </Right>
+            </ListItem>
+            </List>
         )})}
-      </View>
+        </Content>
+      </Container>
     )
   }
 }
 
 
 
-// this.itemsRef.on('evntExample1', (dataSnapshot) => {
-//     this.items.push({id: dataSnapshot.key(), text: dataSnapshot.val()});
-//     this.setState({
-//       todoSource: this.state.todoSource.cloneWithRows(this.items)
-//     });
-//   });
-
-//   // When a todo is removed
-//   this.itemsRef.on('evntExample2', (dataSnapshot) => {
-//       this.items = this.items.filter((x) => x.id !== dataSnapshot.key());
-//       this.setState({
-//         todoSource: this.state.todoSource.cloneWithRows(this.items)
-//       });
-//   });
-
-
-
-
    ///seed:
-  // firebaseApp.database().ref('users/').set({
-  //     gabe: {
-  //       name: 'gabe',
-  //       lat: 37.33017186,
-  //       long: -122.03299256
-  //     },
-  //     omri: {
-  //       name: 'omri',
-  //       lat: 37.33017187,
-  //       long: -122.03299257
-  //     },
-  //     sam: {
-  //       name: 'sam',
-  //       lat: 37.33017659,
-  //       long: -122.03314101
-  //     },
-  //     john: {
-  //       name: 'john',
-  //       lat: 37.33676622,
-  //       long: -122.04160728
-  //     },
-  //     tina: {
-  //       name: 'tina',
-  //       lat: 37.33439537,
-  //       long: -122.06901468
-  //     }
-  //   });
 
+    //   firebaseApp.database().ref('users/').set({
+    //   Gabe: {
+    //     name: 'Gabe',
+    //     lat: 37.33017186,
+    //     long: -122.03299256
+    //   },
+    //   Omri: {
+    //     name: 'Omri',
+    //     lat: 37.33017187,
+    //     long: -122.03299257
+    //   },
+    //   Pim: {
+    //     name: 'Pim',
+    //     lat: 37.33017659,
+    //     long: -122.03314101
+    //   },
+    //   John: {
+    //     name: 'John',
+    //     lat: 37.33676622,
+    //     long: -122.04160728
+    //   },
+    //   tina: {
+    //     name: 'Tina',
+    //     lat: 37.33439537,
+    //     long: -122.06901468
+    //   }
+    // });
+
+
+    //figure out what this event listener does and where to put it
+    // this.dbRef.on("child_added", function(snapshot, prevChildKey) {
+
+    //receive all users data from firebase
+    // this.dbRef.on("value", function(snapshot) {
+    //   var newPost = snapshot.val();
+    //   console.log('newPost:', newPost);
+    // });
+
+  // componentWillUpdate() {
+  //   console.log('here')
+  //   this.getCurrentCoords();
+  //   this.listenForCoords();
+  // }
+
+  // onNavigationStateChange(prev, newState, action) {
+  //   this.getCurrentCoords()
+  //   this.listenForCoords()
+  // }
+
+// componentWillUnmount() {
+//     navigator.geolocation.clearWatch(this.watchId);
+//   }
