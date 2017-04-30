@@ -64,7 +64,7 @@ export class AllPartners extends React.Component {
 
 
   listenForCoords() {
-    this.dbRef.on('value', (snapshot) => {
+    this.dbRef.on('value', snapshot => {
       var coordsArr = [];
       snapshot.forEach((child) => {
         coordsArr.push({

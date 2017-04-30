@@ -50,15 +50,15 @@ export class HomeScreen extends React.Component {
       const { navigate } = this.props.navigation;
         return (
             <Container style={{ flexDirection:'column', justifyContent:'center', backgroundColor: 'skyblue', alignItems:'center' }}>
-                <Content style={{ alignSelf:'center', }}>
-
+                <Content style={{ flexDirection:'column', alignSelf:'center' }}>
+                  <Container style={{height:500, justifyContent:'center'}}>
                     <Thumbnail style={{alignSelf:'center'}} size={200} source={{uri: 'https://d30y9cdsu7xlg0.cloudfront.net/png/31528-200.png'}} />
                     <H1>Partnerize!</H1>
-
+                  </Container>
                 </Content>
                 <Footer>
                     <FooterTab style={{ backgroundColor:'steelblue', padding:0}}>
-                        <Button
+                        <Button style={{padding:0}}
                           onPress={() => navigate('AllPartners')}
                            full>
                             <Text style={{color:'black'}}>Find a Climbing Partner!</Text>
