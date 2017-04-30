@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   View,
-  Button
+  Button,
 } from 'react-native';
 
 import {
@@ -19,6 +19,7 @@ import {
 
 //firebase imports
 import { firebaseApp } from '../../firebase'
+
 
 export class AllPartners extends React.Component {
 

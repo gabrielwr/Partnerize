@@ -34,11 +34,11 @@ export class Message extends React.Component {
       messages: [
         {
           _id: 1,
-          text: 'Do you even lift?',
+          text: 'Hey Gabe, do you even lift?',
           createdAt: new Date(),
           user: {
             _id: 2,
-            name: 'React Native',
+            name: 'Pim',
             avatar: 'https://facebook.github.io/react/img/logo_og.png',
           },
         },
