@@ -42,25 +42,23 @@ export class AllPartners extends React.Component {
   };
 
   componentDidMount() {
-    console.log('hitting did Mount')
     this.getCurrentCoords();
-    this.listenForCoords();
   }
 
   getCurrentCoords() {
     //get current users current position
     navigator.geolocation.getCurrentPosition( position => {
       if(this.state.lat !== position.coords.latitude || this.state.long !== position.coords.longitude ) {
-          console.log('state is diff')
           this.setState({
             lat: position.coords.latitude,
             long: position.coords.longitude,
             error: null,
           });
+          this.listenForCoords()
         }
       },
       (error) => this.setState({ error: error.message }),
-      { enableHighAccuracy: true, timeout: 2000, maximumAge: 1000 },
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
     );
   }
 
@@ -106,14 +104,10 @@ export class AllPartners extends React.Component {
     this.setState({
       nearbyPeople: filtered
     })
-    console.log('findNearby: set');
   }
-
-
 
   render() {
     const { navigate } = this.props.navigation;
-    console.log('render: nearbyPeople', this.state.nearbyPeople)
     return (
       <Container>
         <Content>
