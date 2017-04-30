@@ -6,23 +6,16 @@ import {
 } from 'react-native';
 
 export class User extends React.Component {
-  static navigationOptions = {
-    title: '!',
-  };
+  static navigationOptions = ({ navigation }) => ({
+    title: `${navigation.state.params.user.name}'s Profile`,
+  });
 
   render() {
+    console.log(this.props)
     const { navigate } = this.props.navigation;
     return (
       <View>
-        <Text>Hello, ready to find a climbing partner?</Text>
-        <Button
-            onPress={() => navigate('AllPartners')}
-            title="Yes"
-          />
-        <Button
-            onPress={() => navigate('Home')}
-            title="No"
-          />
+
       </View>
     )
   }

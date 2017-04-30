@@ -19,8 +19,6 @@ import { User } from './User'
 
 export const ClimbingPartnerFinder = StackNavigator({
   Home: { screen: HomeScreen },
-  Find: { screen: FindPartner },
-  Geolocator: { screen: Geolocation },
   AllPartners: { screen: AllPartners },
   Message: { screen: Message },
   User: { screen: User }

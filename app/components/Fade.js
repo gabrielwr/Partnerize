@@ -15,7 +15,8 @@ export class FadeInView extends Component {
     Animated.timing(                            // Animate over time
       this.state.fadeAnim,                      // The animated value to drive
       {
-        toValue: 1,                             // Animate to opacity: 1, or fully opaque
+        toValue: 1,
+        duration: 1500                             // Animate to opacity: 1, or fully opaque
       }
     ).start();                                  // Starts the animation
   }

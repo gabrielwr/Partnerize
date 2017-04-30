@@ -97,12 +97,24 @@ export class AllPartners extends React.Component {
 
   findNearbyPartner(coordsArr) {
     // filter by nearby and then sort by closest
-    var filtered = coordsArr.filter( personObj => {
-      return this.returnDistanceInMiles(personObj.lat,personObj.long,this.state.lat,this.state.long,'N') <= 1
+    var distanceArr = [];
+    coordsArr.forEach( personObj => {
+      personObj.distance = this.returnDistanceInMiles(personObj.lat,personObj.long,this.state.lat,this.state.long,'N').toPrecision(2)
+      distanceArr.push(personObj)
     })
 
+    distanceArr.sort( (a, b) => {
+      console.log(a, b)
+      return a.distance - b.distance
+    })
+
+
+    // var filtered = coordsArr.filter( personObj => {
+    //   return this.returnDistanceInMiles(personObj.lat,personObj.long,this.state.lat,this.state.long,'N') <= 1
+    // })
+
     this.setState({
-      nearbyPeople: filtered
+      nearbyPeople: distanceArr
     })
   }
 
@@ -118,9 +130,13 @@ export class AllPartners extends React.Component {
               <Thumbnail square size={40} source={{uri:'https://placegoat.com/200'}} />
               <Body>
               <Text>{ personObj.name }</Text>
+              <Text>{ personObj.distance } Mi</Text>
               </Body>
+                <Icon style={{color: 'dodgerblue'}} name='person' onPress={ () => {
+                  navigate('User', { user: personObj })
+                }}/>
               <Right>
-                <Icon style={{color: 'steelblue'}} name='arrow-forward' onPress={ () => {
+                <Icon style={{color: 'dodgerblue'}} name='chatbubbles' onPress={ () => {
                   navigate('Message', { user: personObj })
                 }}/>
               </Right>
