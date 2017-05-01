@@ -28,6 +28,7 @@ import {
 import { FadeInView } from './Fade'
 //Socket client
 
+
 export class HomeScreen extends React.Component {
 
   constructor(props) {
@@ -45,7 +46,7 @@ export class HomeScreen extends React.Component {
               <Content style={{ flexDirection:'column', alignSelf:'center' }}>
               <FadeInView>
                 <Container style={{height:500, justifyContent:'center'}}>
-                  <Image style={{alignSelf:'center', height:150, width: 150, borderRadius:10}} source={require('../../boulderer.png')} />
+                  <Image style={{alignSelf:'center', height:150, width: 150, borderRadius:10}} source={require('../../img/boulderer.png')} />
                   <H1 style={{alignSelf:'center'}}>Partnerize!</H1>
                 </Container>
               </FadeInView>
@@ -59,5 +60,3 @@ export class HomeScreen extends React.Component {
       );
   }
 }
-
-// <Icon name='home' />

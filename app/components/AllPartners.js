@@ -30,7 +30,10 @@ export class AllPartners extends React.Component {
       lat: null,
       long: null,
       error: null,
-      nearbyPeople: []
+      nearbyPeople: [],
+      img: '',
+      'One Arm Pullups': '',
+      'Favorite Climbing Area': ''
     };
 
     //creates realtime database reference to users key
@@ -42,6 +45,8 @@ export class AllPartners extends React.Component {
   };
 
   componentDidMount() {
+
+
     this.getCurrentCoords();
   }
 
@@ -71,7 +76,10 @@ export class AllPartners extends React.Component {
           name: child.val().name,
           _key: child.key,
           lat: child.val().lat,
-          long: child.val().long
+          long: child.val().long,
+          img: child.val().img,
+          'One Arm Pullups': child.val()['One Arm Pullups'],
+          'Favorite Climbing Area': child.val()['Favorite Climbing Area']
         });
       });
 
@@ -127,13 +135,18 @@ export class AllPartners extends React.Component {
           return (
             <List key={personObj.name}>
             <ListItem>
-              <Thumbnail square size={40} source={{uri:'https://placegoat.com/200'}} />
+              <Thumbnail size={40} source={{uri:'https://placegoat.com/200/200'}} />
               <Body>
               <Text>{ personObj.name }</Text>
               <Text>{ personObj.distance } Mi</Text>
               </Body>
                 <Icon style={{color: 'dodgerblue'}} name='person' onPress={ () => {
-                  navigate('User', { user: personObj })
+                  navigate('User', { user: {
+                    Name: personObj.name,
+                    'One Arm Pullups': personObj['One Arm Pullups'],
+                    'Favorite Climbing Area': personObj['Favorite Climbing Area'],
+                    Distance: personObj.distance + ' Miles'
+                   }})
                 }}/>
               <Right>
                 <Icon style={{color: 'dodgerblue'}} name='chatbubbles' onPress={ () => {
@@ -153,34 +166,12 @@ export class AllPartners extends React.Component {
 
    ///seed:
 
-    //   firebaseApp.database().ref('users/').set({
-    //   Gabe: {
-    //     name: 'Gabe',
-    //     lat: 37.33017186,
-    //     long: -122.03299256
-    //   },
-    //   Omri: {
-    //     name: 'Omri',
-    //     lat: 37.33017187,
-    //     long: -122.03299257
-    //   },
-    //   Pim: {
-    //     name: 'Pim',
-    //     lat: 37.33017659,
-    //     long: -122.03314101
-    //   },
-    //   John: {
-    //     name: 'John',
-    //     lat: 37.33676622,
-    //     long: -122.04160728
-    //   },
-    //   tina: {
-    //     name: 'Tina',
-    //     lat: 37.33439537,
-    //     long: -122.06901468
-    //   }
-    // });
 
+
+//name
+//favorite climbing area
+//# of one-arm pullups
+//
 
     //figure out what this event listener does and where to put it
     // this.dbRef.on("child_added", function(snapshot, prevChildKey) {
@@ -205,3 +196,49 @@ export class AllPartners extends React.Component {
 // componentWillUnmount() {
 //     navigator.geolocation.clearWatch(this.watchId);
 //   }
+
+
+
+    //  firebaseApp.database().ref('users/').set({
+    //   Gabe: {
+    //     name: 'Gabe',
+    //     lat: 37.33017186,
+    //     long: -122.03299256,
+    //     img: 'Gabe.png',
+    //       'One Arm Pullups': '-1',
+    //            'Favorite Climbing Area': 'My Pullup Bar'
+    //   },
+    //   Omri: {
+    //     name: 'Omri',
+    //     lat: 37.33017187,
+    //     long: -122.03299257,
+    //      img: 'Omri.png',
+    //     'One Arm Pullups': 'Math.MAX_SAFE_INTEGER',
+    //          'Favorite Climbing Area': 'Farley, MA'
+    //   },
+    //   Pim: {
+    //     name: 'Pim',
+    //     lat: 37.33017659,
+    //     long: -122.03314101,
+    //     img: 'Pim.png',
+    //      'One Arm Pullups': '23',
+    //        'Favorite Climbing Area': 'Oliana, Spain'
+    //   },
+    //   John: {
+    //     name: 'John',
+    //     lat: 37.33676622,
+    //     long: -122.04160728,
+    //     img: 'John.png',
+    //      'One Arm Pullups': 'Math.MAX_SAFE_INTEGER',
+    //      'Favorite Climbing Area': 'Sheffield'
+    //   },
+    //   Tina: {
+    //     name: 'Tina',
+    //     lat: 37.33439537,
+    //     long: -122.06901468,
+    //     img: 'Tina.png',
+    //      'One Arm Pullups': '14',
+    //      'Favorite Climbing Area': 'The Gunks'
+
+    //   }
+    // });
