@@ -45,8 +45,6 @@ export class AllPartners extends React.Component {
   };
 
   componentDidMount() {
-
-
     this.getCurrentCoords();
   }
 
@@ -89,10 +87,10 @@ export class AllPartners extends React.Component {
 
 
   returnDistanceInMiles(lat1, lon1, lat2, lon2, unit) {
-    let radlat1 = Math.PI * lat1/180
-    let radlat2 = Math.PI * lat2/180
-    let theta = lon1-lon2
-    let radtheta = Math.PI * theta/180
+    const radlat1 = Math.PI * lat1/180
+    const radlat2 = Math.PI * lat2/180
+    const theta = lon1-lon2
+    const radtheta = Math.PI * theta/180
     let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
     dist = Math.acos(dist)
     dist = dist * 180/Math.PI
@@ -112,7 +110,6 @@ export class AllPartners extends React.Component {
     })
 
     distanceArr.sort( (a, b) => {
-      console.log(a, b)
       return a.distance - b.distance
     })
 
