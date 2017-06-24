@@ -83,11 +83,11 @@ function _sendMessage(message, socket, fromServer) {
 }
 
 // Allow the server to participate in the chatroom through stdin.
-var stdin = process.openStdin();
-stdin.addListener('data', function(d) {
-  _sendMessage({
-    text: d.toString().trim(),
-    createdAt: new Date(),
-    user: { _id: 'robot' }
-  }, null /* no socket */, true /* send from server */);
+const stdin = process.openStdin();
+stdin.addListener('data', function(message) {
+  _sendMessage(
+    { text: message.toString().trim(), createdAt: new Date(),user: { _id: 'robot' } },
+    null, //no socket
+    true, //send from server
+  );
 });
