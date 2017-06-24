@@ -86,8 +86,8 @@ function _sendMessage(message, socket, fromServer) {
 const stdin = process.openStdin();
 stdin.addListener('data', function(message) {
   _sendMessage(
-    { text: message.toString().trim(), createdAt: new Date(),user: { _id: 'robot' } },
+    { text: message.toString().trim(), createdAt: new Date(), user: { _id: 'robot' } },
     null, //no socket
-    true, //send from server
+    true //send from server
   );
 });
