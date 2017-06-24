@@ -1,32 +1,16 @@
 //React Imports
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import {
-  AppRegistry,
-  View,
-  Animated,
-  Image
-} from 'react-native';
+import { Image } from 'react-native';
+import { FadeInView } from './Fade'
 
 import {
   Container,
-  Header,
-  Title,
   Content,
-  Footer,
-  FooterTab,
   Button,
-  Left,
-  Right,
-  Body,
-  Icon,
   Text,
-  Thumbnail,
   H1
 } from 'native-base';
-
-import { FadeInView } from './Fade'
-//Socket client
 
 
 export class HomeScreen extends React.Component {
@@ -53,7 +37,6 @@ export class HomeScreen extends React.Component {
               </Content>
                 <Button style={{height:50}} primary iconLeft onPress={() => navigate('AllPartners')}
                     full>
-
                   <Text>Find A Climbing Partner!</Text>
                 </Button>
           </Container>

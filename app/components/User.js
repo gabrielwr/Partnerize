@@ -2,22 +2,10 @@ import React from 'react';
 
 import {
   View,
-  Button,
   Image,
   StyleSheet,
   Text
 } from 'react-native';
-
-import {
-  Container,
-  Content,
-  Spinner,
-  List,
-  ListItem,
-  Right,
-  Icon,
-  Body
-} from 'native-base';
 
 export class User extends React.Component {
 
@@ -33,12 +21,11 @@ export class User extends React.Component {
 
 
   render() {
-    console.log(this.props)
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container}>
-        <View style={styles.profileContainer}>
-          <Image size={200} style={styles.profileImage} source={{uri: 'https://placegoat.com/400/400'}}/>
+      <View style={ styles.container }>
+        <View style={ styles.profileContainer }>
+          <Image size={200} style={ styles.profileImage} source={{uri: 'https://placegoat.com/400/400'} }/>
         </View>
           {Object.keys(this.person).map( key => {
             return (
@@ -59,31 +46,27 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white'
   },
-
   text: {
     fontSize: 15
   },
-
   profileText: {
     fontSize: 27,
     fontWeight: '100'
   },
-
   profileImage: {
     height: 140,
     width: 140,
     borderRadius: 70,
     marginBottom: 20
   },
-
   profileContainer: {
     backgroundColor: 'lightskyblue',
     alignItems: 'center',
-    flex:1,
+    flex: 1,
     justifyContent: 'center'
   },
   contactRowContainer: {
-    flexDirection:'row',
+    flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'dodgerblue',
     borderBottomWidth: 1,
@@ -101,8 +84,3 @@ const styles = StyleSheet.create({
     color: 'white'
   },
 })
-
-//name
-//favorite climbing area
-//# of one-arm pullups
-//
