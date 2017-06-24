@@ -49,7 +49,7 @@ export class AllPartners extends React.Component {
   }
 
   getCurrentCoords() {
-    //get current users current position
+    //get current user's current position
     navigator.geolocation.getCurrentPosition( position => {
       if(this.state.lat !== position.coords.latitude || this.state.long !== position.coords.longitude ) {
           this.setState({
@@ -68,7 +68,7 @@ export class AllPartners extends React.Component {
 
   listenForCoords() {
     this.dbRef.on('value', snapshot => {
-      var coordsArr = [];
+      const coordsArr = [];
       snapshot.forEach((child) => {
         coordsArr.push({
           name: child.val().name,
@@ -93,8 +93,10 @@ export class AllPartners extends React.Component {
     const radtheta = Math.PI * theta/180
     let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
     dist = Math.acos(dist)
-    dist = dist * 180/Math.PI
-    dist = dist * 60 * 1.1515
+    dist *= 180/Math.PI
+    dist *= 60 * 1.1515
+
+    //conversion for different units
     if (unit === "K") { dist *= 1.609344 }
     if (unit === "N") { dist *= 0.8684 }
 
@@ -103,7 +105,7 @@ export class AllPartners extends React.Component {
 
   findNearbyPartner(coordsArr) {
     // filter by nearby and then sort by closest
-    var distanceArr = [];
+    const distanceArr = [];
     coordsArr.forEach( personObj => {
       personObj.distance = this.returnDistanceInMiles(personObj.lat,personObj.long,this.state.lat,this.state.long,'N').toPrecision(2)
       distanceArr.push(personObj)

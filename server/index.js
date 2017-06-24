@@ -15,8 +15,7 @@ const users = {};
 // For this example purpose, there is only one chatroom;
 const chatId = 1;
 
-websocket.on('connection', (socket) => {
-    // console.log('connection occurred')
+websocket.on('connection', socket => {
     clients[socket.id] = socket;
     // socket.on('userJoined', (userId) => onUserJoined(userId, socket));
     socket.on('message', (message) => onMessageReceived(message, socket));
@@ -45,9 +44,9 @@ websocket.on('connection', (socket) => {
 
 // When a user sends a message in the chatroom.
 function onMessageReceived(message, senderSocket) {
-  var userId = users[senderSocket.id];
-  console.log(message.text)
-  // Safety check.
+  const userId = users[senderSocket.id];
+
+  // if no id on socket, don't send message
   if (!userId) return;
 
   _sendMessage(message, senderSocket);
@@ -68,13 +67,14 @@ function _sendExistingMessages(socket) {
 
 // Save the message to the db and send all sockets but the sender.
 function _sendMessage(message, socket, fromServer) {
-  var messageData = {
+  //used to insert to db
+  const messageData = {
     text: message.text,
     user: message.user,
     createdAt: new Date(message.createdAt),
     chatId: chatId
   };
-    var emitter = fromServer ? websocket : socket.broadcast;
+    const emitter = fromServer ? websocket : socket.broadcast;
     emitter.emit('message', [message]);
 
   // db.collection('messages').insert(messageData, (err, message) => {
