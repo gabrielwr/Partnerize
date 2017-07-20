@@ -1,14 +1,9 @@
 const express = require('express');
-// const http = require('http')
 const socketio = require('socket.io');
 const app = express();
 
-//G: don't think we need this but check.....
-// const server = http.Server(app);
-
-
-const websocket = socketio( app );
-app.listen(3000, () => console.log('listening on port 3000'));
+const server = app.listen(3000, () => console.log('listening on port 3000'));
+const websocket = socketio( server );
 
 // Mapping objects to easily map sockets and users.
 const clients = {};
@@ -24,9 +19,13 @@ websocket.on('connection', socket => {
   socket.on('message', message => onMessageReceived(message, socket));
 });
 
+
+//next four functions used to be non arrow functions, make
+// sure sockets aren't operating using this context
+
 // Event listeners.
 // When a user joins the chatroom.
-function onUserJoined(userId, socket) {
+const onUserJoined = (userId, socket) => {
   console.log('in onUserJoined, userId', userId, 'socket', socket);
   try {
     // The userId is null for new users.
@@ -46,7 +45,7 @@ function onUserJoined(userId, socket) {
 }
 
 // When a user sends a message in the chatroom.
-function onMessageReceived(message, senderSocket) {
+const onMessageReceived = (message, senderSocket) => {
   console.log(message)
   const userId = users[senderSocket.id];
 
@@ -58,7 +57,7 @@ function onMessageReceived(message, senderSocket) {
 
 // Helper functions.
 // Send the pre-existing messages to the user that just joined.
-function _sendExistingMessages(socket) {
+const _sendExistingMessages = socket => {
   // var messages = db.collection('messages')
   //   .find({ chatId })
   //   .sort({ createdAt: 1 })
@@ -70,7 +69,7 @@ function _sendExistingMessages(socket) {
 }
 
 // Save the message to the db and send all sockets but the sender.
-function _sendMessage(message, socket, fromServer) {
+const _sendMessage = message, socket, fromServer => {
   //used to insert to db
   const messageData = {
     text: message.text,
@@ -90,7 +89,6 @@ function _sendMessage(message, socket, fromServer) {
 const stdin = process.openStdin();
 stdin.addListener('data', message => {
   //this used to be non-arrow function, does that matter?
-  console.log('message in stdin', message)
   _sendMessage(
     { text: message.toString().trim(), createdAt: new Date(), user: { _id: 'robot' } },
     null, //no socket
