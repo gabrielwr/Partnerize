@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
 export class Geolocation extends Component {
-  constructor(props) {
-    super(props);
+  constructor( props ) {
+    super( props );
 
     this.state = {
       latitude: null,
@@ -27,14 +27,14 @@ export class Geolocation extends Component {
   }
 
   componentWillUnmount() {
-    navigator.geolocation.clearWatch(this.watchId);
+    navigator.geolocation.clearWatch( this.watchId );
   }
 
   render() {
     return (
       <View style={{ flexGrow: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Latitude: {this.state.latitude}</Text>
-        <Text>Longitude: {this.state.longitude}</Text>
+        <Text>Latitude: { this.state.latitude }</Text>
+        <Text>Longitude: { this.state.longitude }</Text>
         { this.state.error ? <Text>Error: { this.state.error }</Text> : null }
       </View>
     );

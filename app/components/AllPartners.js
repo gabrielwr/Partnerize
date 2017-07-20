@@ -56,7 +56,7 @@ export class AllPartners extends React.Component {
           this.listenForCoords()
         }
       },
-      (error) => this.setState({ error: error.message }),
+      ( error ) => this.setState({ error: error.message }),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
     );
   }
