@@ -126,31 +126,44 @@ export class AllPartners extends React.Component {
     return (
       <Container>
         <Content>
-        {!this.state.nearbyPeople.length ? <Spinner color='blue' /> : this.state.nearbyPeople.map( personObj => {
-          return (
-            <List key={personObj.name}>
-            <ListItem>
-              <Thumbnail size={40} source={{uri:'https://placegoat.com/200/200'}} />
-              <Body>
-              <Text>{ personObj.name }</Text>
-              <Text>{ personObj.distance } Mi</Text>
-              </Body>
-                <Icon style={{color: 'dodgerblue'}} name='person' onPress={ () => {
-                  navigate('User', { user: {
-                    Name: personObj.name,
-                    'One Arm Pullups': personObj['One Arm Pullups'],
-                    'Favorite Climbing Area': personObj['Favorite Climbing Area'],
-                    Distance: personObj.distance + ' Miles'
-                   }})
-                }}/>
-              <Right>
-                <Icon style={{color: 'dodgerblue'}} name='chatbubbles' onPress={ () => {
-                  navigate('Message', { user: personObj })
-                }}/>
-              </Right>
-            </ListItem>
-            </List>
-        )})}
+        { !this.state.nearbyPeople.length ?
+          <Spinner color='blue' />
+          :
+          this.state.nearbyPeople.map( personObj => {
+            return (
+              <List key={ personObj.name }>
+              <ListItem>
+                <Thumbnail size={ 40 } source={{ uri:'https://placegoat.com/200/200' }} />
+                <Body>
+                <Text>{ personObj.name }</Text>
+                <Text>{ personObj.distance } Mi</Text>
+                </Body>
+                  <Icon
+                    style={{ color: 'dodgerblue' }}
+                    name='person'
+                    onPress={ () => {
+                      navigate('User', { user: {
+                        Name: personObj.name,
+                        'One Arm Pullups': personObj['One Arm Pullups'],
+                        'Favorite Climbing Area': personObj['Favorite Climbing Area'],
+                        Distance: personObj.distance + ' Miles'
+                      }})
+                    }}
+                  />
+                <Right>
+                  <Icon
+                    style={{color: 'dodgerblue'}}
+                    name='chatbubbles'
+                    onPress={ () => {
+                      navigate('Message', { user: personObj })
+                    }}
+                  />
+                </Right>
+              </ListItem>
+              </List>
+            )
+          })
+        }
         </Content>
       </Container>
     )

@@ -27,11 +27,11 @@ export class User extends React.Component {
         <View style={ styles.profileContainer }>
           <Image size={200} style={ styles.profileImage} source={{uri: 'https://placegoat.com/400/400'} }/>
         </View>
-          {Object.keys(this.person).map( key => {
+          { Object.keys(this.person).map( key => {
             return (
-              <View key={key} style={styles.contactRowContainer}>
-                <Text style={[styles.text, styles.contactKey]}> {key} </Text>
-                <Text style={[styles.text, styles.contactValue]}> {this.person[key]} </Text>
+              <View key={ key } style={ styles.contactRowContainer }>
+                <Text style={ [styles.text, styles.contactKey] }> { key } </Text>
+                <Text style={ [styles.text, styles.contactValue] }> { this.person[key] } </Text>
               </View>
             )
           })}

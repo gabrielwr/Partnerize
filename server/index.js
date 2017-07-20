@@ -17,33 +17,34 @@ const chatId = 1;
 
 websocket.on('connection', socket => {
     clients[socket.id] = socket;
-    // socket.on('userJoined', (userId) => onUserJoined(userId, socket));
+    socket.on('userJoined', (userId) => onUserJoined(userId, socket));
     socket.on('message', (message) => onMessageReceived(message, socket));
 });
 
 // Event listeners.
 // When a user joins the chatroom.
-// function onUserJoined(userId, socket) {
-//   console.log('onUserJoined')
-//   try {
-//     // The userId is null for new users.
-//     if (!userId) {
-//       // const user = db.collection('users').insert({}, (err, user) => {
-//       //   socket.emit('userJoined', user._id);
-//       //   users[socket.id] = user._id;
-//       //   _sendExistingMessages(socket);
-//       // });
-//     } else {
-//       users[socket.id] = userId;
-//       _sendExistingMessages(socket);
-//     }
-//   } catch(err) {
-//     console.err(err);
-//   }
-// }
+function onUserJoined(userId, socket) {
+  console.log('in onUserJoined');
+  try {
+    // The userId is null for new users.
+    if (!userId) {
+      // const user = db.collection('users').insert({}, (err, user) => {
+      //   socket.emit('userJoined', user._id);
+      //   users[socket.id] = user._id;
+      //   _sendExistingMessages(socket);
+      // });
+    } else {
+      users[socket.id] = userId;
+      _sendExistingMessages(socket);
+    }
+  } catch(err) {
+    console.err(err);
+  }
+}
 
 // When a user sends a message in the chatroom.
 function onMessageReceived(message, senderSocket) {
+  console.log(message)
   const userId = users[senderSocket.id];
 
   // if no id on socket, don't send message
