@@ -1,11 +1,14 @@
 const express = require('express');
-const http = require('http')
+// const http = require('http')
 const socketio = require('socket.io');
-
 const app = express();
-const server = http.Server(app);
-const websocket = socketio(server);
-server.listen(3000, () => console.log('listening on *:3000'));
+
+//G: don't think we need this but check.....
+// const server = http.Server(app);
+
+
+const websocket = socketio( app );
+app.listen(3000, () => console.log('listening on port 3000'));
 
 // Mapping objects to easily map sockets and users.
 const clients = {};
@@ -16,15 +19,15 @@ const users = {};
 const chatId = 1;
 
 websocket.on('connection', socket => {
-    clients[socket.id] = socket;
-    socket.on('userJoined', (userId) => onUserJoined(userId, socket));
-    socket.on('message', (message) => onMessageReceived(message, socket));
+  clients[socket.id] = socket;
+  socket.on('userJoined', userId => onUserJoined(userId, socket));
+  socket.on('message', message => onMessageReceived(message, socket));
 });
 
 // Event listeners.
 // When a user joins the chatroom.
 function onUserJoined(userId, socket) {
-  console.log('in onUserJoined');
+  console.log('in onUserJoined, userId', userId, 'socket', socket);
   try {
     // The userId is null for new users.
     if (!userId) {
@@ -85,7 +88,9 @@ function _sendMessage(message, socket, fromServer) {
 
 // Allow the server to participate in the chatroom through stdin.
 const stdin = process.openStdin();
-stdin.addListener('data', function(message) {
+stdin.addListener('data', message => {
+  //this used to be non-arrow function, does that matter?
+  console.log('message in stdin', message)
   _sendMessage(
     { text: message.toString().trim(), createdAt: new Date(), user: { _id: 'robot' } },
     null, //no socket

@@ -1,15 +1,5 @@
-// import React from 'react';
-// import {
-//   Text,
-//   View,
-//   Button
-// } from 'react-native';
 
-// import SocketIOClient from 'socket.io-client';
 // import * as firebase from 'firebase';
-
-// //Chat lib
-// import { GiftedChat } from 'react-native-gifted-chat';
 
 // export class Message extends React.Component {
 
@@ -23,10 +13,6 @@
 //     //class method binding
 //     this.onSend = this.onSend.bind(this);
 //   }
-
-
-
-
 
 //   onAvatarPress() {
 //     console.log('made it here')
@@ -58,12 +44,11 @@
 
 
 import React from 'react';
-import { View, Text, AsyncStorage } from 'react-native';
 import SocketIOClient from 'socket.io-client';
+import { View, Text, AsyncStorage } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 
 const USER_ID = '@userId';
-
 
 export class Message extends React.Component {
   constructor( props ) {
@@ -80,6 +65,9 @@ export class Message extends React.Component {
 
     this.socket = SocketIOClient( 'http://localhost:3000' );
     this.socket.on( 'message', this.onReceivedMessage );
+  }
+
+  componentDidMount() {
     this.determineUser();
   }
 
@@ -147,11 +135,9 @@ export class Message extends React.Component {
 
   // Helper functions
   _storeMessages( messages ) {
-    this.setState( previousState => {
-      return {
-        messages: GiftedChat.append(previousState.messages, messages),
-      };
-    });
+    this.setState( previousState => ({
+      messages: GiftedChat.append(previousState.messages, messages),
+    }))
   }
 }
 

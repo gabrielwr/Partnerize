@@ -14,11 +14,10 @@ export class User extends React.Component {
 
     this.person = this.props.navigation.state.params.user
   }
+
   static navigationOptions = ({ navigation }) => ({
     title: `${navigation.state.params.user.Name}'s Profile`,
   });
-
-
 
   render() {
     const { navigate } = this.props.navigation;
