@@ -25,7 +25,7 @@ websocket.on('connection', socket => {
 
 // Event listeners.
 // When a user joins the chatroom.
-const onUserJoined = (userId, socket) => {
+const onUserJoined = ( userId, socket ) => {
   console.log('in onUserJoined, userId', userId, 'socket', socket);
   try {
     // The userId is null for new users.
