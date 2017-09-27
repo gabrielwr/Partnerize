@@ -44,6 +44,7 @@
 
 
 import React from 'react';
+// import io from 'socket.io-client/socket.io'
 import SocketIOClient from 'socket.io-client';
 import { View, Text, AsyncStorage } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';

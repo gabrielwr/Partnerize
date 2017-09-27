@@ -29,13 +29,13 @@ export class HomeScreen extends React.Component {
           <Container style={{ flexDirection:'column', justifyContent:'center', backgroundColor: 'lightskyblue', alignItems:'center' }}>
               <Content style={{ flexDirection:'column', alignSelf:'center' }}>
               <FadeInView>
-                <Container style={{height:500, justifyContent:'center'}}>
-                  <Image style={{alignSelf:'center', height:150, width: 150, borderRadius:10}} source={require('../../img/boulderer.png')} />
-                  <H1 style={{alignSelf:'center'}}>Partnerize!</H1>
+                <Container style={{ height:500, justifyContent:'center' }}>
+                  <Image style={{ alignSelf:'center', height:150, width: 150, borderRadius:10 }} source={ require('../../img/boulderer.png') } />
+                  <H1 style={{ alignSelf:'center' }}>Partnerize!</H1>
                 </Container>
               </FadeInView>
               </Content>
-                <Button style={{height:50}} primary iconLeft onPress={() => navigate('AllPartners')}
+                <Button style={{ height:50 }} primary iconLeft onPress={() => navigate('AllPartners')}
                     full>
                   <Text>Find A Climbing Partner!</Text>
                 </Button>
