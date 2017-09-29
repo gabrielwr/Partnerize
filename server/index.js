@@ -69,7 +69,7 @@ const _sendExistingMessages = socket => {
 }
 
 // Save the message to the db and send all sockets but the sender.
-const _sendMessage = message, socket, fromServer => {
+const _sendMessage = (message, socket, fromServer) => {
   //used to insert to db
   const messageData = {
     text: message.text,
