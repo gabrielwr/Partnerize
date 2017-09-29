@@ -1,7 +1,7 @@
 //React Imports
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import { Image } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import { FadeInView } from './Fade'
 
 import {
@@ -26,12 +26,12 @@ export class HomeScreen extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
       return (
-          <Container style={ styles.container1 }>
+          <Container style={ styles.containerMain }>
               <Content style={ styles.content }>
               <FadeInView>
-                <Container style={ styles.container2  }>
+                <Container style={ styles.containerSecondary  }>
                   <Image style={ styles.image } source={ require('../../img/boulderer.png') } />
-                  <H1 style={ styles.H1 }>Partnerize!</H1>
+                  <H1 style={ styles.title }>Partnerize!</H1>
                 </Container>
               </FadeInView>
               </Content>
@@ -46,7 +46,7 @@ export class HomeScreen extends React.Component {
 
 
 const styles = StyleSheet.create({
-  container1: {
+  containerMain: {
     flexDirection: 'column',
     justifyContent: 'center',
     backgroundColor: 'lightskyblue',
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignSelf: 'center'
   },
-  container2: {
+  containerSecondary: {
     height: 500,
     justifyContent: 'center'
   },
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     width: 150,
     borderRadius: 10
   },
-  H1: {
+  title: {
     alignSelf:'center'
   },
   button: {
