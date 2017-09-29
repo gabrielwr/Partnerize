@@ -25,22 +25,28 @@ export class HomeScreen extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
-      return (
-          <Container style={ styles.containerMain }>
-              <Content style={ styles.content }>
-              <FadeInView>
-                <Container style={ styles.containerSecondary  }>
-                  <Image style={ styles.image } source={ require('../../img/boulderer.png') } />
-                  <H1 style={ styles.title }>Partnerize!</H1>
-                </Container>
-              </FadeInView>
-              </Content>
-                <Button style={ styles.button } primary iconLeft onPress={() => navigate('AllPartners')}
-                    full>
-                  <Text>Find A Climbing Partner!</Text>
-                </Button>
-          </Container>
-      );
+
+    return (
+      <Container style={ styles.containerMain }>
+        <Content style={ styles.content }>
+          <FadeInView>
+            <Container style={ styles.containerSecondary  }>
+              <Image style={ styles.image } source={ require('../../img/boulderer.png') } />
+              <H1 style={ styles.title }>Partnerize!</H1>
+            </Container>
+          </FadeInView>
+        </Content>
+          <Button
+            style={ styles.button }
+            primary
+            iconLeft
+            onPress={() => navigate('AllPartners')}
+            full
+          >
+            <Text>Find A Climbing Partner!</Text>
+          </Button>
+      </Container>
+    );
   }
 }
 
@@ -67,7 +73,7 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
   title: {
-    alignSelf:'center'
+    alignSelf: 'center'
   },
   button: {
     height: 50
