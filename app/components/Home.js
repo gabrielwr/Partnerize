@@ -26,16 +26,16 @@ export class HomeScreen extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
       return (
-          <Container style={{ flexDirection:'column', justifyContent:'center', backgroundColor: 'lightskyblue', alignItems:'center' }}>
-              <Content style={{ flexDirection:'column', alignSelf:'center' }}>
+          <Container style={ styles.container1 }>
+              <Content style={ styles.content }>
               <FadeInView>
-                <Container style={{ height:500, justifyContent:'center' }}>
-                  <Image style={{ alignSelf:'center', height:150, width: 150, borderRadius:10 }} source={ require('../../img/boulderer.png') } />
-                  <H1 style={{ alignSelf:'center' }}>Partnerize!</H1>
+                <Container style={ styles.container2  }>
+                  <Image style={ styles.image } source={ require('../../img/boulderer.png') } />
+                  <H1 style={ styles.H1 }>Partnerize!</H1>
                 </Container>
               </FadeInView>
               </Content>
-                <Button style={{ height:50 }} primary iconLeft onPress={() => navigate('AllPartners')}
+                <Button style={ styles.button } primary iconLeft onPress={() => navigate('AllPartners')}
                     full>
                   <Text>Find A Climbing Partner!</Text>
                 </Button>
@@ -43,3 +43,33 @@ export class HomeScreen extends React.Component {
       );
   }
 }
+
+
+const styles = StyleSheet.create({
+  container1: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: 'lightskyblue',
+    alignItems: 'center'
+  },
+  content: {
+    flexDirection: 'column',
+    alignSelf: 'center'
+  },
+  container2: {
+    height: 500,
+    justifyContent: 'center'
+  },
+  image: {
+    alignSelf: 'center',
+    height: 150,
+    width: 150,
+    borderRadius: 10
+  },
+  H1: {
+    alignSelf:'center'
+  },
+  button: {
+    height: 50
+  }
+})
