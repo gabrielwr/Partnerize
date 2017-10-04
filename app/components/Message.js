@@ -1,47 +1,4 @@
 
-// import * as firebase from 'firebase';
-
-// export class Message extends React.Component {
-
-//   constructor(props) {
-//     super(props)
-//     this.state = {
-//       messages: [],
-//       userId: null
-//     }
-
-//     //class method binding
-//     this.onSend = this.onSend.bind(this);
-//   }
-
-//   onAvatarPress() {
-//     console.log('made it here')
-//     this.props.navigation.navigate('User');
-//   }
-
-//   onSend(messages = []) {
-//     this.setState( previousState => {
-//       return {
-//         messages: GiftedChat.append(previousState.messages, messages),
-//       }
-//     });
-//   }
-
-//   render() {
-
-//     return (
-//       <GiftedChat
-//         messages={this.state.messages}
-//         onSend={this.onSend}
-//         user={{
-//           _id: 1,
-//         }}
-//         onClick={this.onAvatarPress}
-//       />
-//     );
-//   }
-// }
-
 
 import React from 'react';
 // import io from 'socket.io-client/socket.io'
