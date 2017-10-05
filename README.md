@@ -1,4 +1,4 @@
-[![GitHub issues](https://img.shields.io/github/issues/gabrielwr/Parternize.svg)](https://github.com/gabrielwr/Parternize/issues)
+[![GitHub issues](https://img.shields.io/github/issues/gabrielwr/Partnerize.svg)](https://github.com/gabrielwr/Partnerize/issues)
 
 
 # Partnerize
