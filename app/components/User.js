@@ -30,7 +30,9 @@ export class User extends React.Component {
             return (
               <View key={ key } style={ styles.contactRowContainer }>
                 <Text style={ [styles.text, styles.contactKey] }> { key } </Text>
-                <Text style={ [styles.text, styles.contactValue] }> { this.person[key] } </Text>
+                <Text style={ [styles.text, styles.contactValue] }>
+                  { this.person[key] }
+                </Text>
               </View>
             )
           })}

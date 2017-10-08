@@ -25,7 +25,7 @@ websocket.on('connection', socket => {
 
 // Event listeners.
 // When a user joins the chatroom.
-const onUserJoined = (userId, socket) => {
+const onUserJoined = ( userId, socket ) => {
   console.log('in onUserJoined, userId', userId, 'socket', socket);
   try {
     // The userId is null for new users.
@@ -69,7 +69,7 @@ const _sendExistingMessages = socket => {
 }
 
 // Save the message to the db and send all sockets but the sender.
-const _sendMessage = message, socket, fromServer => {
+const _sendMessage = (message, socket, fromServer) => {
   //used to insert to db
   const messageData = {
     text: message.text,
