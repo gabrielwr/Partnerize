@@ -12,7 +12,6 @@ import {
 //Component imports
 import { HomeScreen } from './Home'
 import { AllPartners } from './AllPartners'
-import { Geolocation } from './Geolocation'
 import { Message } from './Message'
 import { User } from './User'
 
