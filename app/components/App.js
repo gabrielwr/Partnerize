@@ -23,7 +23,3 @@ export const ClimbingPartnerFinder = StackNavigator({
 });
 
 AppRegistry.registerComponent('ClimbingPartnerFinder', () => ClimbingPartnerFinder);
-
-
-
-
