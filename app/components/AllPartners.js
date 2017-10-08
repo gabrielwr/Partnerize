@@ -14,7 +14,9 @@ import {
   Body
 } from 'native-base';
 
-//firebase imports
+import { AllPartnersIcons } from './AllPartnersIcons';
+
+//firebase import
 import { firebaseApp } from '../../firebase'
 
 export class AllPartners extends React.Component {
@@ -52,8 +54,7 @@ export class AllPartners extends React.Component {
             lat: position.coords.latitude,
             long: position.coords.longitude,
             error: null,
-          });
-          this.listenForCoords()
+          }, () => this.listenForCoords() );
         }
       },
       ( error ) => this.setState({ error: error.message }),
@@ -63,9 +64,9 @@ export class AllPartners extends React.Component {
 
 
   listenForCoords() {
-    this.dbRef.on('value', snapshot => {
+    this.dbRef.on('value', snapshotArr => {
       const coordsArr = [];
-      snapshot.forEach((child) => {
+      snapshotArr.forEach( child => {
         coordsArr.push({
           name: child.val().name,
           _key: child.key,
@@ -85,11 +86,11 @@ export class AllPartners extends React.Component {
   returnDistanceInMiles(lat1, lon1, lat2, lon2, unit) {
     const radlat1 = Math.PI * lat1/180
     const radlat2 = Math.PI * lat2/180
-    const theta = lon1-lon2
+    const theta = lon1 - lon2
     const radtheta = Math.PI * theta/180
     let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
     dist = Math.acos(dist)
-    dist *= 180/Math.PI
+    dist *= 180 / Math.PI
     dist *= 60 * 1.1515
 
     //conversion for different units
@@ -103,18 +104,19 @@ export class AllPartners extends React.Component {
     // filter by nearby and then sort by closest
     const distanceArr = [];
     coordsArr.forEach( personObj => {
-      personObj.distance = this.returnDistanceInMiles(personObj.lat,personObj.long,this.state.lat,this.state.long,'N').toPrecision(2)
+      personObj.distance = this.returnDistanceInMiles(
+        personObj.lat,
+        personObj.long,
+        this.state.lat,
+        this.state.long,
+        'N'
+      ).toPrecision(2)
       distanceArr.push(personObj)
     })
 
     distanceArr.sort( (a, b) => {
       return a.distance - b.distance
     })
-
-
-    // var filtered = coordsArr.filter( personObj => {
-    //   return this.returnDistanceInMiles(personObj.lat,personObj.long,this.state.lat,this.state.long,'N') <= 1
-    // })
 
     this.setState({
       nearbyPeople: distanceArr
@@ -130,36 +132,20 @@ export class AllPartners extends React.Component {
           <Spinner color='blue' />
           :
           this.state.nearbyPeople.map( personObj => {
+            let props = {
+              personObj,
+              navigate
+            }
             return (
               <List key={ personObj.name }>
-              <ListItem>
-                <Thumbnail size={ 40 } source={{ uri:'https://placegoat.com/200/200' }} />
-                <Body>
-                <Text>{ personObj.name }</Text>
-                <Text>{ personObj.distance } Mi</Text>
-                </Body>
-                  <Icon
-                    style={{ color: 'dodgerblue' }}
-                    name='person'
-                    onPress={ () => {
-                      navigate('User', { user: {
-                        Name: personObj.name,
-                        'One Arm Pullups': personObj['One Arm Pullups'],
-                        'Favorite Climbing Area': personObj['Favorite Climbing Area'],
-                        Distance: personObj.distance + ' Miles'
-                      }})
-                    }}
-                  />
-                <Right>
-                  <Icon
-                    style={{color: 'dodgerblue'}}
-                    name='chatbubbles'
-                    onPress={ () => {
-                      navigate('Message', { user: personObj })
-                    }}
-                  />
-                </Right>
-              </ListItem>
+                <ListItem>
+                  <Thumbnail size={ 40 } source={{ uri:'https://placegoat.com/200/200' }} />
+                  <Body>
+                  <Text>{ personObj.name }</Text>
+                  <Text>{ personObj.distance } Mi</Text>
+                  </Body>
+                  <AllPartnersIcons { ...props } />
+                </ListItem>
               </List>
             )
           })
@@ -169,84 +155,3 @@ export class AllPartners extends React.Component {
     )
   }
 }
-
-
-
-   ///seed:
-
-
-
-//name
-//favorite climbing area
-//# of one-arm pullups
-//
-
-    //figure out what this event listener does and where to put it
-    // this.dbRef.on("child_added", function(snapshot, prevChildKey) {
-
-    //receive all users data from firebase
-    // this.dbRef.on("value", function(snapshot) {
-    //   var newPost = snapshot.val();
-    //   console.log('newPost:', newPost);
-    // });
-
-  // componentWillUpdate() {
-  //   console.log('here')
-  //   this.getCurrentCoords();
-  //   this.listenForCoords();
-  // }
-
-  // onNavigationStateChange(prev, newState, action) {
-  //   this.getCurrentCoords()
-  //   this.listenForCoords()
-  // }
-
-// componentWillUnmount() {
-//     navigator.geolocation.clearWatch(this.watchId);
-//   }
-
-
-
-    //  firebaseApp.database().ref('users/').set({
-    //   Gabe: {
-    //     name: 'Gabe',
-    //     lat: 37.33017186,
-    //     long: -122.03299256,
-    //     img: 'Gabe.png',
-    //       'One Arm Pullups': '-1',
-    //            'Favorite Climbing Area': 'My Pullup Bar'
-    //   },
-    //   Omri: {
-    //     name: 'Omri',
-    //     lat: 37.33017187,
-    //     long: -122.03299257,
-    //      img: 'Omri.png',
-    //     'One Arm Pullups': 'Math.MAX_SAFE_INTEGER',
-    //          'Favorite Climbing Area': 'Farley, MA'
-    //   },
-    //   Pim: {
-    //     name: 'Pim',
-    //     lat: 37.33017659,
-    //     long: -122.03314101,
-    //     img: 'Pim.png',
-    //      'One Arm Pullups': '23',
-    //        'Favorite Climbing Area': 'Oliana, Spain'
-    //   },
-    //   John: {
-    //     name: 'John',
-    //     lat: 37.33676622,
-    //     long: -122.04160728,
-    //     img: 'John.png',
-    //      'One Arm Pullups': 'Math.MAX_SAFE_INTEGER',
-    //      'Favorite Climbing Area': 'Sheffield'
-    //   },
-    //   Tina: {
-    //     name: 'Tina',
-    //     lat: 37.33439537,
-    //     long: -122.06901468,
-    //     img: 'Tina.png',
-    //      'One Arm Pullups': '14',
-    //      'Favorite Climbing Area': 'The Gunks'
-
-    //   }
-    // });

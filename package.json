@@ -6,7 +6,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "server": "nodemon server",
-    "ios": "react-native run-ios"
+    "ios": "react-native run-ios",
+    "seed": "node ./server/seed"
   },
   "dependencies": {
     "express": "^4.15.2",
