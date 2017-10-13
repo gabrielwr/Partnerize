@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 //Component imports
-import { HomeScreen } from './components/Home'
+import HomeScreen  from './components/Home'
 import { AllPartners } from './components/AllPartners'
 import { Message } from './components/Message'
 import { User } from './components/User'
