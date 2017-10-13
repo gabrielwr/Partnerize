@@ -50,7 +50,6 @@ export class HomeScreen extends React.Component {
   }
 }
 
-
 const styles = StyleSheet.create({
   containerMain: {
     flexDirection: 'column',

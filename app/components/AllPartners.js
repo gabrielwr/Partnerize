@@ -62,7 +62,6 @@ export class AllPartners extends React.Component {
     );
   }
 
-
   listenForCoords() {
     this.dbRef.on('value', snapshotArr => {
       const coordsArr = [];
@@ -139,7 +138,10 @@ export class AllPartners extends React.Component {
             return (
               <List key={ personObj.name }>
                 <ListItem>
-                  <Thumbnail size={ 40 } source={{ uri:'https://placegoat.com/200/200' }} />
+                  <Thumbnail
+                    size={ 40 }
+                    source={{ uri:'https://placegoat.com/200/200' }}
+                  />
                   <Body>
                   <Text>{ personObj.name }</Text>
                   <Text>{ personObj.distance } Mi</Text>

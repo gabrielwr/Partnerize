@@ -1,3 +1,3 @@
-import { ClimbingPartnerFinder } from './app/components/App'
+import { ClimbingPartnerFinder } from './app/App'
 
 console.disableYellowBox = true;
