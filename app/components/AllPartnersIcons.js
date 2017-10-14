@@ -19,7 +19,6 @@ export class AllPartnersIcons extends React.Component {
 
   constructor(props) {
     super(props)
-    console.log('checking props:', this.props)
     this.navigate = this.props.navigate
   }
 

@@ -42,14 +42,14 @@ export class HomeScreen extends React.Component {
         </Content>
         <Footer>
           <FooterTab>
-          <Button
-            primary
-            iconLeft
-            onPress={() => navigate('AllPartners')}
-            full
-          >
-            <Text style={styles.text}>Find A Climbing Partner!</Text>
-          </Button>
+            <Button
+              primary
+              iconLeft
+              onPress={() => navigate('AllPartners')}
+              full
+            >
+              <Text style={styles.text}>Find A Climbing Partner!</Text>
+            </Button>
           </FooterTab>
         </Footer>
       </Container>
