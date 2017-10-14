@@ -29,7 +29,6 @@ export class HomeScreen extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     const styles = this.props.style;
-    console.log('style', styles, this.props)
 
     return (
       <Container style={ styles.containerMain }>
@@ -58,6 +57,7 @@ export class HomeScreen extends React.Component {
   }
 }
 
+// Not using stylesheet create due to native base
 const styles = {
   containerMain: {
     flexDirection: 'column',
@@ -83,8 +83,8 @@ const styles = {
     alignSelf: 'center'
   },
   text: {
-    color: 'black'
-  }
+    color: 'white'
+  },
 }
 
 export default connectStyle('namespace.HomeScreen', styles)(HomeScreen);
