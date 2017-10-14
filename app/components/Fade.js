@@ -1,4 +1,4 @@
-// FadeInView.js
+
 import React, { Component } from 'react';
 import { Animated } from 'react-native';
 
@@ -12,15 +12,15 @@ export class FadeInView extends Component {
   }
 
   componentDidMount() {
-    Animated.timing(                   // Animate over time
-      this.state.fadeAnim,             // The animated value to drive
-      { toValue: 1, duration: 1500 }   // Animate to opacity: 1, or fully opaque
-    ).start();                         // Starts the animation
+    Animated.timing(
+      this.state.fadeAnim,
+      { toValue: 1, duration: 1500 }
+    )
+    .start()
   }
 
   render() {
     return (
-      // Special animatable View
       <Animated.View
         style={{
           ...this.props.style,

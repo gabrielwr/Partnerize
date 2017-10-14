@@ -10,11 +10,10 @@ import {
 } from 'react-native';
 
 //Component imports
-import { HomeScreen } from './Home'
-import { AllPartners } from './AllPartners'
-import { Geolocation } from './Geolocation'
-import { Message } from './Message'
-import { User } from './User'
+import HomeScreen  from './components/Home'
+import { AllPartners } from './components/AllPartners'
+import { Message } from './components/Message'
+import { User } from './components/User'
 
 export const ClimbingPartnerFinder = StackNavigator({
   Home: { screen: HomeScreen },
@@ -24,7 +23,3 @@ export const ClimbingPartnerFinder = StackNavigator({
 });
 
 AppRegistry.registerComponent('ClimbingPartnerFinder', () => ClimbingPartnerFinder);
-
-
-
-

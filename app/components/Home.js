@@ -5,9 +5,12 @@ import { Image, StyleSheet } from 'react-native';
 import { FadeInView } from './Fade'
 
 import {
+  connectStyle,
   Container,
   Content,
   Button,
+  Footer,
+  FooterTab,
   Text,
   H1
 } from 'native-base';
@@ -25,6 +28,7 @@ export class HomeScreen extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
+    const styles = this.props.style;
 
     return (
       <Container style={ styles.containerMain }>
@@ -36,22 +40,25 @@ export class HomeScreen extends React.Component {
             </Container>
           </FadeInView>
         </Content>
+        <Footer>
+          <FooterTab>
           <Button
-            style={ styles.button }
             primary
             iconLeft
             onPress={() => navigate('AllPartners')}
             full
           >
-            <Text>Find A Climbing Partner!</Text>
+            <Text style={styles.text}>Find A Climbing Partner!</Text>
           </Button>
+          </FooterTab>
+        </Footer>
       </Container>
     );
   }
 }
 
-
-const styles = StyleSheet.create({
+// Not using stylesheet create due to native base
+const styles = {
   containerMain: {
     flexDirection: 'column',
     justifyContent: 'center',
@@ -75,7 +82,9 @@ const styles = StyleSheet.create({
   title: {
     alignSelf: 'center'
   },
-  button: {
-    height: 50
-  }
-})
+  text: {
+    color: 'white'
+  },
+}
+
+export default connectStyle('namespace.HomeScreen', styles)(HomeScreen);
