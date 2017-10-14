@@ -4,7 +4,7 @@
 # Partnerize
 Love rock climbing, but can’t ever seem to find a partner?
 
-Partnerize is a mobile application built using React-Native, Native Base, Firebase, Socket.io, and the Geolocation API. Partnerize allows users to find and message climbers nearby in order to meet up and climb!
+Partnerize is a mobile application built over 3 days using React-Native, Native Base, Firebase, Socket.io, and the Geolocation API. Partnerize allows users to find and message climbers nearby in order to meet up and climb!
 
 The React Native code is contained in the `app` file.
 
