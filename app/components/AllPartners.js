@@ -81,7 +81,6 @@ export class AllPartners extends React.Component {
     })
   }
 
-
   returnDistanceInMiles(lat1, lon1, lat2, lon2, unit) {
     const radlat1 = Math.PI * lat1/180
     const radlat2 = Math.PI * lat2/180
@@ -130,27 +129,25 @@ export class AllPartners extends React.Component {
         { !this.state.nearbyPeople.length ?
           <Spinner color='blue' />
           :
-          this.state.nearbyPeople.map( personObj => {
-            let props = {
-              personObj,
-              navigate
-            }
-            return (
-              <List key={ personObj.name }>
-                <ListItem>
-                  <Thumbnail
-                    size={ 40 }
-                    source={{ uri:'https://placegoat.com/200/200' }}
-                  />
-                  <Body>
+          <List
+            dataArray={ this.state.nearbyPeople }
+            renderRow={ personObj =>
+              <ListItem>
+                <Thumbnail
+                  size={ 40 }
+                  source={{ uri:'https://placegoat.com/200/200' }}
+                />
+                <Body>
                   <Text>{ personObj.name }</Text>
                   <Text>{ personObj.distance } Mi</Text>
-                  </Body>
-                  <AllPartnersIcons { ...props } />
-                </ListItem>
-              </List>
-            )
-          })
+                </Body>
+                <AllPartnersIcons
+                  navigate={ navigate }
+                  personObj={ personObj }
+                />
+              </ListItem>
+            }
+          />
         }
         </Content>
       </Container>
