@@ -1,5 +1,4 @@
 import React from 'react';
-import { View, Button} from 'react-native';
 
 import {
   Container,
@@ -8,8 +7,6 @@ import {
   List,
   ListItem,
   Text,
-  Right,
-  Icon,
   Thumbnail,
   Body
 } from 'native-base';

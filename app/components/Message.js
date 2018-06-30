@@ -1,9 +1,8 @@
 
 
 import React from 'react';
-// import io from 'socket.io-client/socket.io'
-import SocketIOClient from 'socket.io-client';
-import { View, Text, AsyncStorage } from 'react-native';
+import io from 'socket.io-client';
+import { AsyncStorage } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 
 const USER_ID = '@userId';
@@ -21,7 +20,7 @@ export class Message extends React.Component {
     this.onSend = this.onSend.bind( this );
     this._storeMessages = this._storeMessages.bind( this );
 
-    this.socket = SocketIOClient( 'http://localhost:3000' );
+    this.socket = io( 'http://localhost:3000', {jsonp: false});
     this.socket.on( 'message', this.onReceivedMessage );
   }
 
@@ -46,7 +45,7 @@ export class Message extends React.Component {
         if (!userId) {
           this.socket.emit( 'userJoined', null );
           this.socket.on( 'userJoined', userId => {
-            AsyncStorage.setItem( USER_ID, userId) ;
+            AsyncStorage.setItem( USER_ID, userId ) ;
             this.setState({ userId });
           });
         } else {
@@ -95,11 +94,6 @@ export class Message extends React.Component {
   _storeMessages( messages ) {
     this.setState( previousState => ({
       messages: GiftedChat.append(previousState.messages, messages),
-    }))
+    }));
   }
 }
-
-
-
-
-

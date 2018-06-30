@@ -1,8 +1,6 @@
-//React Imports
 import React from 'react';
-import { StackNavigator } from 'react-navigation';
-import { Image, StyleSheet } from 'react-native';
-import { FadeInView } from './Fade'
+import { Image } from 'react-native';
+import { FadeInView } from './Fade';
 
 import {
   connectStyle,
@@ -15,12 +13,7 @@ import {
   H1
 } from 'native-base';
 
-
 export class HomeScreen extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
 
   static navigationOptions = {
     title: 'Home',
@@ -35,7 +28,7 @@ export class HomeScreen extends React.Component {
         <Content style={ styles.content }>
           <FadeInView>
             <Container style={ styles.containerSecondary  }>
-              <Image style={ styles.image } source={ require('../../img/boulderer.png') } />
+              <Image style={ styles.image } source={ require('../img/boulderer.png') } />
               <H1 style={ styles.title }>Partnerize!</H1>
             </Container>
           </FadeInView>

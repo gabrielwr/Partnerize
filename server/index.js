@@ -26,7 +26,7 @@ websocket.on('connection', socket => {
 // Event listeners.
 // When a user joins the chatroom.
 const onUserJoined = ( userId, socket ) => {
-  console.log('in onUserJoined, userId', userId, 'socket', socket);
+  // console.log('in onUserJoined, userId', userId, 'socket', socket);
   try {
     // The userId is null for new users.
     if (!userId) {
@@ -46,7 +46,7 @@ const onUserJoined = ( userId, socket ) => {
 
 // When a user sends a message in the chatroom.
 const onMessageReceived = (message, senderSocket) => {
-  console.log(message)
+  console.log('checking message:', message)
   const userId = users[senderSocket.id];
 
   // if no id on socket, don't send message
@@ -80,6 +80,7 @@ const _sendMessage = (message, socket, fromServer) => {
     const emitter = fromServer ? websocket : socket.broadcast;
     emitter.emit('message', [message]);
 
+
   // db.collection('messages').insert(messageData, (err, message) => {
   //   // If the message is from the server, then send to everyone.
   // });
@@ -88,6 +89,7 @@ const _sendMessage = (message, socket, fromServer) => {
 // Allow the server to participate in the chatroom through stdin.
 const stdin = process.openStdin();
 stdin.addListener('data', message => {
+  console.log('stdin event', message.toString())
   //this used to be non-arrow function, does that matter?
   _sendMessage(
     { text: message.toString().trim(), createdAt: new Date(), user: { _id: 'robot' } },
