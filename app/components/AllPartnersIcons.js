@@ -1,19 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import {
-  Container,
-  Content,
-  Spinner,
-  List,
-  ListItem,
-  Text,
-  Right,
-  Icon,
-  Thumbnail,
-  Body
-} from 'native-base';
-
+import { Icon } from 'native-base';
 
 export class AllPartnersIcons extends React.Component {
 

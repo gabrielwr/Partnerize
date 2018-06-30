@@ -2,7 +2,7 @@
 
 import React from 'react';
 import io from 'socket.io-client';
-import { View, Text, AsyncStorage } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 
 const USER_ID = '@userId';
@@ -39,7 +39,6 @@ export class Message extends React.Component {
    * Set the userId to the component's state.
    */
   determineUser() {
-    console.log('helloooo')
     AsyncStorage.getItem( USER_ID )
       .then( userId => {
         // If there isn't a stored userId, then fetch one from the server.
@@ -93,16 +92,8 @@ export class Message extends React.Component {
 
   // Helper functions
   _storeMessages( messages ) {
-    console.log('prevState', this.state)
     this.setState( previousState => ({
       messages: GiftedChat.append(previousState.messages, messages),
-    }), () => {
-      console.log('postState', this.state)
-    })
+    }));
   }
 }
-
-
-
-
-

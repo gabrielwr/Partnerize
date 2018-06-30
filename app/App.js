@@ -1,13 +1,6 @@
-
-//React Imports
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import {
-  AppRegistry,
-  Text,
-  View,
-  Button
-} from 'react-native';
+import { AppRegistry } from 'react-native';
 
 //Component imports
 import HomeScreen  from './components/Home'
