@@ -13,7 +13,6 @@ import {
 
 import { AllPartnersIcons } from './AllPartnersIcons';
 
-//firebase import
 import { firebaseApp } from '../../firebase'
 
 export class AllPartners extends React.Component {
@@ -31,7 +30,7 @@ export class AllPartners extends React.Component {
       'Favorite Climbing Area': ''
     };
 
-    //creates realtime database reference to users key
+    //set user db ref
     this.dbRef = firebaseApp.database().ref('users')
   }
 
@@ -44,7 +43,6 @@ export class AllPartners extends React.Component {
   }
 
   getCurrentCoords() {
-    //get current user's current position
     navigator.geolocation.getCurrentPosition( position => {
       if(this.state.lat !== position.coords.latitude || this.state.long !== position.coords.longitude ) {
           this.setState({

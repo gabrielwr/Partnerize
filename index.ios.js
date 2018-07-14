@@ -1,3 +1,1 @@
-import { ClimbingPartnerFinder } from './app/App'
-
-console.disableYellowBox = true;
+import { App } from './app/App';
