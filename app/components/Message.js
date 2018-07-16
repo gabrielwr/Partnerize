@@ -7,6 +7,7 @@ const USER_ID = '@userId';
 
 export class Message extends React.Component {
   constructor() {
+    super();
     this.state = {
       messages: [],
       userId: null
