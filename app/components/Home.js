@@ -20,16 +20,15 @@ export class HomeScreen extends React.Component {
   };
 
   render() {
-    // this might need to be "style" instead of style -- possible bug.
-    const { navigate, styles } = this.props;
+    const { navigate, style } = this.props;
 
     return (
-      <Container style={ styles.containerMain }>
-        <Content style={ styles.content }>
+      <Container style={ style.containerMain }>
+        <Content style={ style.content }>
           <FadeInView>
-            <Container style={ styles.containerSecondary  }>
-              <Image style={ styles.image } source={ require('../img/boulderer.png') } />
-              <H1 style={ styles.title }>Partnerize!</H1>
+            <Container style={ style.containerSecondary  }>
+              <Image style={ style.image } source={ require('../img/boulderer.png') } />
+              <H1 style={ style.title }>Partnerize!</H1>
             </Container>
           </FadeInView>
         </Content>
@@ -41,7 +40,7 @@ export class HomeScreen extends React.Component {
               onPress={() => navigate('AllPartners')}
               full
             >
-              <Text style={styles.text}>Find A Climbing Partner!</Text>
+              <Text style={style.text}>Find A Climbing Partner!</Text>
             </Button>
           </FooterTab>
         </Footer>
