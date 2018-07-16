@@ -1,4 +1,4 @@
-package com.climbingpartnerfinder;
+package com.partnerize;
 
 import android.app.Application;
 

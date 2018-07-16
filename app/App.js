@@ -15,4 +15,4 @@ export const App = StackNavigator({
   User: { screen: User }
 });
 
-AppRegistry.registerComponent('Partnerize', () => App);
+AppRegistry.registerComponent('partnerize', () => App);
