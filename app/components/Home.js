@@ -20,8 +20,8 @@ export class HomeScreen extends React.Component {
   };
 
   render() {
-    const { navigate } = this.props.navigation;
-    const styles = this.props.style;
+    // this might need to be "style" instead of style -- possible bug.
+    const { navigate, styles } = this.props;
 
     return (
       <Container style={ styles.containerMain }>

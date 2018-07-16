@@ -1,13 +1,11 @@
-
 import React, { Component } from 'react';
 import { Animated } from 'react-native';
 
 export class FadeInView extends Component {
-  constructor( props ) {
-    super( props );
+  constructor() {
+    super();
     this.state = {
-      // Initial value for opacity: 0
-      fadeAnim: new Animated.Value( 0 ),
+      fadeAnim: new Animated.Value(0),
     };
   }
 
@@ -15,8 +13,7 @@ export class FadeInView extends Component {
     Animated.timing(
       this.state.fadeAnim,
       { toValue: 1, duration: 1500 }
-    )
-    .start()
+    ).start();
   }
 
   render() {
