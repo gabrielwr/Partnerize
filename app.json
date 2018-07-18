@@ -1,4 +1,5 @@
 {
-  "name": "partnerize",
-  "displayName": "partnerize"
+  "expo": {
+    "sdkVersion": "27.0.0"
+  }
 }

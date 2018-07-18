@@ -20,7 +20,7 @@ export class HomeScreen extends React.Component {
   };
 
   render() {
-    const { navigate, style } = this.props;
+    const { navigation: { navigate }, style } = this.props;
 
     return (
       <Container style={ style.containerMain }>
