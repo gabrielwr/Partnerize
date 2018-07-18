@@ -4,14 +4,10 @@ import AppLogo from '../../img/boulderer.png';
 
 import {
   Button,
-  Footer,
-  FooterTab,
-} from 'native-base';
-
-import {
   Content,
   CenteredText,
   CenteredLogoText,
+  Footer,
   HomeScreenWrapper,
   Image,
   LogoWrapper,
@@ -37,16 +33,9 @@ export class HomeScreen extends React.Component {
           </FadeInView>
         </Content>
         <Footer>
-          <FooterTab>
-            <Button
-              primary
-              iconLeft
-              onPress={() => navigate('AllPartners')}
-              full
-            >
+            <Button onPress={() => navigate('AllPartners')}>
               <CenteredText>Find A Climbing Partner!</CenteredText>
             </Button>
-          </FooterTab>
         </Footer>
       </HomeScreenWrapper>
     );
