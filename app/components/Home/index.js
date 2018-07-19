@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+
 import { FadeInView } from '../../elements/Fade';
 import AppLogo from '../../img/boulderer.png';
 
@@ -13,7 +14,7 @@ import {
   LogoWrapper,
 } from './styled';
 
-export class HomeScreen extends React.Component {
+export class HomeScreen extends Component {
 
   static navigationOptions = {
     title: 'Home',
