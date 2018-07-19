@@ -6,7 +6,7 @@ import { Icon } from 'native-base';
 export class AllPartnersIcons extends React.Component {
   onUserPress(personObj) {
     const { navigate } = this.props;
-    navigate('User', {
+    navigate('UserProfile', {
       user: {
         Name: personObj.name,
         'One Arm Pullups': personObj['One Arm Pullups'],
