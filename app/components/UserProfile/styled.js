@@ -27,10 +27,6 @@ export const Row = styled.View`
   border-color: white;
 `;
 
-export const Text = styled.Text`
-  font-size: 15;
-`;
-
 export const Category = styled.Text`
   fontWeight: bold;
   width: 130;

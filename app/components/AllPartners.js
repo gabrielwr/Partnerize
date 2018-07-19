@@ -15,6 +15,8 @@ import { AllPartnersIcons } from './AllPartnersIcons';
 
 import { firebaseApp } from '../../firebase'
 
+import ImagePlaceholder from '../img/Gabe.png';
+
 export class AllPartners extends React.Component {
 
   constructor(props) {
@@ -31,7 +33,7 @@ export class AllPartners extends React.Component {
     };
 
     //set user db ref
-    this.dbRef = firebaseApp.database().ref('users')
+    this.dbRef = firebaseApp.database().ref('users');
   }
 
   static navigationOptions = {
@@ -43,11 +45,12 @@ export class AllPartners extends React.Component {
   }
 
   getCurrentCoords() {
-    navigator.geolocation.getCurrentPosition( position => {
-      if(this.state.lat !== position.coords.latitude || this.state.long !== position.coords.longitude ) {
+    const { lat, long } = this.state;
+    navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude }}) => {
+      if(lat !== latitude || long !== longitude ) {
           this.setState({
-            lat: position.coords.latitude,
-            long: position.coords.longitude,
+            lat: latitude,
+            long: longitude,
             error: null,
           }, () => this.listenForCoords() );
         }
@@ -73,18 +76,18 @@ export class AllPartners extends React.Component {
       });
 
       this.findNearbyPartner(coordsArr);
-    })
+    });
   }
 
   returnDistanceInMiles(lat1, lon1, lat2, lon2, unit) {
-    const radlat1 = Math.PI * lat1/180
-    const radlat2 = Math.PI * lat2/180
-    const theta = lon1 - lon2
-    const radtheta = Math.PI * theta/180
+    const radlat1 = Math.PI * lat1/180;
+    const radlat2 = Math.PI * lat2/180;
+    const theta = lon1 - lon2;
+    const radtheta = Math.PI * theta/180;
     let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-    dist = Math.acos(dist)
-    dist *= 180 / Math.PI
-    dist *= 60 * 1.1515
+    dist = Math.acos(dist);
+    dist *= 180 / Math.PI;
+    dist *= 60 * 1.1515;
 
     //conversion for different units
     if (unit === "K") { dist *= 1.609344 }
@@ -103,38 +106,39 @@ export class AllPartners extends React.Component {
         this.state.lat,
         this.state.long,
         'N'
-      ).toPrecision(2)
-      distanceArr.push(personObj)
-    })
+      ).toPrecision(2);
+      distanceArr.push(personObj);
+    });
 
     distanceArr.sort( (a, b) => {
-      return a.distance - b.distance
-    })
+      return a.distance - b.distance;
+    });
 
     this.setState({
       nearbyPeople: distanceArr
-    })
+    });
   }
 
   render() {
     const { navigate } = this.props.navigation;
+    const { nearbyPeople } = this.state;
     return (
       <Container>
         <Content>
-        { !this.state.nearbyPeople.length ?
+        { !nearbyPeople.length ?
           <Spinner color='blue' />
           :
           <List
-            dataArray={ this.state.nearbyPeople }
+            dataArray={ nearbyPeople }
             renderRow={ personObj =>
               <ListItem>
                 <Thumbnail
                   size={ 40 }
-                  source={{ uri:'https://placegoat.com/200/200' }}
+                  source={ ImagePlaceholder }
                 />
                 <Body>
                   <Text>{ personObj.name }</Text>
-                  <Text>{ personObj.distance } Mi</Text>
+                  <Text>{ personObj.distance }{' '}Mi</Text>
                 </Body>
                 <AllPartnersIcons
                   navigate={ navigate }

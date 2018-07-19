@@ -4,8 +4,10 @@ import { View, StyleSheet } from 'react-native';
 import { Icon } from 'native-base';
 
 export class AllPartnersIcons extends React.Component {
+
   onUserPress(personObj) {
     const { navigate } = this.props;
+
     navigate('UserProfile', {
       user: {
         Name: personObj.name,
