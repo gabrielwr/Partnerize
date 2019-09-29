@@ -5,15 +5,15 @@ export class FadeInView extends Component {
   constructor() {
     super();
     this.state = {
-      fadeAnim: new Animated.Value(0),
+      fadeAnim: new Animated.Value(0)
     };
   }
 
   componentDidMount() {
-    Animated.timing(
-      this.state.fadeAnim,
-      { toValue: 1, duration: 1500 }
-    ).start();
+    Animated.timing(this.state.fadeAnim, {
+      toValue: 1,
+      duration: 1500
+    }).start();
   }
 
   render() {
@@ -21,10 +21,10 @@ export class FadeInView extends Component {
       <Animated.View
         style={{
           ...this.props.style,
-          opacity: this.state.fadeAnim,  // Bind opacity to animated value
+          opacity: this.state.fadeAnim // Bind opacity to animated value
         }}
       >
-        { this.props.children }
+        {this.props.children}
       </Animated.View>
     );
   }

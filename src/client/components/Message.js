@@ -13,9 +13,8 @@ export class Message extends React.Component {
       userId: null
     };
 
-
-    this.socket = io( 'http://localhost:3000', { jsonp: false });
-    this.socket.on( 'message', this.onReceivedMessage );
+    this.socket = io('http://localhost:3000', { jsonp: false });
+    this.socket.on('message', this.onReceivedMessage);
   }
 
   componentDidMount() {
@@ -23,7 +22,7 @@ export class Message extends React.Component {
   }
 
   static navigationOptions = ({ navigation }) => ({
-    title: `Chat with ${navigation.state.params.user.name}`,
+    title: `Chat with ${navigation.state.params.user.name}`
   });
 
   /**
@@ -32,13 +31,13 @@ export class Message extends React.Component {
    * Set the userId to the component's state.
    */
   determineUser = () => {
-    AsyncStorage.getItem( USER_ID )
-      .then( userId => {
+    AsyncStorage.getItem(USER_ID)
+      .then(userId => {
         // If there isn't a stored userId, then fetch one from the server.
         if (!userId) {
-          this.socket.emit( 'userJoined', null );
-          this.socket.on( 'userJoined', userId => {
-            AsyncStorage.setItem( USER_ID, userId ) ;
+          this.socket.emit('userJoined', null);
+          this.socket.on('userJoined', userId => {
+            AsyncStorage.setItem(USER_ID, userId);
             this.setState({ userId });
           });
         } else {
@@ -46,25 +45,25 @@ export class Message extends React.Component {
           this.setState({ userId });
         }
       })
-      .catch( e => alert( e ) );
-  }
+      .catch(e => alert(e));
+  };
 
   // Event listeners
   /**
    * When the server sends a message to this.
    */
-  onReceivedMessage = ( messages ) => {
-    this._storeMessages( messages );
-  }
+  onReceivedMessage = messages => {
+    this._storeMessages(messages);
+  };
 
   /**
    * When a message is sent, send the message to the server
    * and store it in this component's state.
    */
-  onSend = ( messages = [] ) => {
-    this.socket.emit( 'message', messages[0] );
-    this._storeMessages( messages );
-  }
+  onSend = (messages = []) => {
+    this.socket.emit('message', messages[0]);
+    this._storeMessages(messages);
+  };
 
   render() {
     const { navigate } = this.props.navigation;
@@ -72,21 +71,21 @@ export class Message extends React.Component {
 
     return (
       <GiftedChat
-        messages={ this.state.messages }
-        onSend={ this.onSend }
+        messages={this.state.messages}
+        onSend={this.onSend}
         user={{
-            _id: 2,
-            name: 'Pim',
-            avatar: 'https://facebook.github.io/react/img/logo_og.png',
+          _id: 2,
+          name: 'Pim',
+          avatar: 'https://facebook.github.io/react/img/logo_og.png'
         }}
       />
     );
   }
 
   // Helper functions
-  _storeMessages = ( messages ) => {
-    this.setState( previousState => ({
-      messages: GiftedChat.append(previousState.messages, messages),
+  _storeMessages = messages => {
+    this.setState(previousState => ({
+      messages: GiftedChat.append(previousState.messages, messages)
     }));
-  }
+  };
 }
