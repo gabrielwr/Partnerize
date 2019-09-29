@@ -4,7 +4,8 @@
   "private": true,
   "devDependencies": {
     "jest-expo": "~27.0.0",
-    "react-native-scripts": "^1.14.1",
+    "nodemon": "^1.19.2",
+    "react-native-scripts": "^2.0.1",
     "react-test-renderer": "16.3.1"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
@@ -21,15 +22,13 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "expo": "^27.0.1",
     "express": "^4.16.3",
     "firebase": "^5.2.0",
     "mongodb": "^3.1.1",
     "mongojs": "^2.6.0",
-    "native-base": "^2.7.1",
-    "nodemon": "^1.18.2",
+    "native-base": "^2.13.8",
     "react": "16.3.1",
-    "react-native": "^0.55.4",
+    "react-native": "^0.61.1",
     "react-native-gifted-chat": "^0.4.3",
     "react-navigation": "^2.6.2",
     "socket.io": "^2.1.1",
