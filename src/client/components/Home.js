@@ -14,21 +14,26 @@ import {
 } from 'native-base';
 
 export class HomeScreen extends React.Component {
-
   static navigationOptions = {
-    title: 'Home',
+    title: 'Home'
   };
 
   render() {
-    const { navigation: { navigate }, style } = this.props;
+    const {
+      navigation: { navigate },
+      style
+    } = this.props;
 
     return (
-      <Container style={ style.containerMain }>
-        <Content style={ style.content }>
+      <Container style={style.containerMain}>
+        <Content style={style.content}>
           <FadeInView>
-            <Container style={ style.containerSecondary  }>
-              <Image style={ style.image } source={ require('../img/boulderer.png') } />
-              <H1 style={ style.title }>Partnerize!</H1>
+            <Container style={style.containerSecondary}>
+              <Image
+                style={style.image}
+                source={require('../img/boulderer.png')}
+              />
+              <H1 style={style.title}>Partnerize!</H1>
             </Container>
           </FadeInView>
         </Content>
@@ -76,7 +81,7 @@ const styles = {
   },
   text: {
     color: 'white'
-  },
-}
+  }
+};
 
 export default connectStyle('namespace.HomeScreen', styles)(HomeScreen);

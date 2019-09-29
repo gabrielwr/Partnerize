@@ -16,8 +16,8 @@
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
     "test": "jest",
-    "seed": "node ./server/seed",
-    "server": "nodemon server"
+    "seed": "node ./src/server/seed",
+    "server": "nodemon ./src/server"
   },
   "jest": {
     "preset": "jest-expo"

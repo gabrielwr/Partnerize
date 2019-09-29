@@ -1,35 +1,33 @@
 import React from 'react';
 
-import {
-  View,
-  Image,
-  StyleSheet,
-  Text
-} from 'react-native';
+import { View, Image, StyleSheet, Text } from 'react-native';
 
 export class User extends React.Component {
-
   static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.state.params.user.Name}'s Profile`,
+    title: `${navigation.state.params.user.Name}'s Profile`
   });
 
   render() {
-    const { user } = this.props.navigation.state.params
+    const { user } = this.props.navigation.state.params;
     return (
-      <View style={ styles.container }>
-        <View style={ styles.profileContainer }>
-          <Image size={ 200 } style={ styles.profileImage} source={{ uri: 'https://placegoat.com/400/400' }}/>
+      <View style={styles.container}>
+        <View style={styles.profileContainer}>
+          <Image
+            size={200}
+            style={styles.profileImage}
+            source={{ uri: 'https://placegoat.com/400/400' }}
+          />
         </View>
-          { Object.keys( user ).map( key => {
-            return (
-              <View key={ key } style={ styles.contactRowContainer }>
-                <Text style={ [styles.text, styles.contactKey] }> { key } </Text>
-                <Text style={ [styles.text, styles.contactValue] }>
-                  { user[key] }
-                </Text>
-              </View>
-            );
-          })}
+        {Object.keys(user).map(key => {
+          return (
+            <View key={key} style={styles.contactRowContainer}>
+              <Text style={[styles.text, styles.contactKey]}> {key} </Text>
+              <Text style={[styles.text, styles.contactValue]}>
+                {user[key]}
+              </Text>
+            </View>
+          );
+        })}
       </View>
     );
   }
@@ -71,10 +69,10 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     color: 'white'
   },
-  contactKey:{
+  contactKey: {
     fontWeight: 'bold',
     width: 130,
     marginLeft: 10,
     color: 'white'
-  },
+  }
 });

@@ -13,7 +13,7 @@ import {
 
 import { AllPartnersIcons } from './AllPartnersIcons';
 
-import { firebaseApp } from '../../firebase';
+import { firebaseApp } from '../firebase';
 
 export class AllPartners extends React.Component {
   constructor(props) {
