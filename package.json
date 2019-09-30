@@ -16,7 +16,7 @@
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
     "test": "jest",
-    "seed": "node ./src/server/seed",
+    "seed": "node ./src/client/firebase/seed",
     "server": "nodemon ./src/server"
   },
   "jest": {
@@ -33,6 +33,7 @@
     "react-native-gifted-chat": "^0.4.3",
     "react-navigation": "^2.6.2",
     "socket.io": "^2.1.1",
-    "socket.io-client": "^2.1.1"
+    "socket.io-client": "^2.1.1",
+    "styled-components": "^3.3.3"
   }
 }

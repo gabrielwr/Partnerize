@@ -11,5 +11,5 @@ export default createStackNavigator({
   Home: { screen: HomeScreen },
   AllPartners: { screen: AllPartners },
   Message: { screen: Message },
-  User: { screen: User }
+  UserProfile: { screen: UserProfile }
 });
