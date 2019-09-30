@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { FadeInView } from '../../elements/Fade';
+import { FadeInView } from '../../../../app/elements/Fade';
 import AppLogo from '../../img/boulderer.png';
 
 import {
@@ -11,32 +11,33 @@ import {
   Footer,
   HomeScreenWrapper,
   Image,
-  LogoWrapper,
+  LogoWrapper
 } from './styled';
 
 export class HomeScreen extends Component {
-
   static navigationOptions = {
-    title: 'Home',
+    title: 'Home'
   };
 
   render() {
-    const { navigation: { navigate } } = this.props;
+    const {
+      navigation: { navigate }
+    } = this.props;
 
     return (
       <HomeScreenWrapper>
         <Content>
           <FadeInView>
             <LogoWrapper>
-              <Image source={ AppLogo } />
+              <Image source={AppLogo} />
               <CenteredLogoText>Partnerize!</CenteredLogoText>
             </LogoWrapper>
           </FadeInView>
         </Content>
         <Footer>
-            <Button onPress={() => navigate('AllPartners')}>
-              <CenteredText>Find A Climbing Partner!</CenteredText>
-            </Button>
+          <Button onPress={() => navigate('AllPartners')}>
+            <CenteredText>Find A Climbing Partner!</CenteredText>
+          </Button>
         </Footer>
       </HomeScreenWrapper>
     );

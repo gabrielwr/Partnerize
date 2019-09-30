@@ -13,12 +13,9 @@ import {
 
 import { AllPartnersIcons } from './AllPartnersIcons';
 
-import { firebaseApp } from '../../firebase'
-
-import ImagePlaceholder from '../img/Gabe.png';
+import { firebaseApp } from '../firebase';
 
 export class AllPartners extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -37,7 +34,7 @@ export class AllPartners extends React.Component {
   }
 
   static navigationOptions = {
-    title: 'Nearby',
+    title: 'Nearby'
   };
 
   componentDidMount() {
@@ -45,25 +42,31 @@ export class AllPartners extends React.Component {
   }
 
   getCurrentCoords() {
-    const { lat, long } = this.state;
-    navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude }}) => {
-      if(lat !== latitude || long !== longitude ) {
-          this.setState({
-            lat: latitude,
-            long: longitude,
-            error: null,
-          }, () => this.listenForCoords() );
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        if (
+          this.state.lat !== position.coords.latitude ||
+          this.state.long !== position.coords.longitude
+        ) {
+          this.setState(
+            {
+              lat: position.coords.latitude,
+              long: position.coords.longitude,
+              error: null
+            },
+            () => this.listenForCoords()
+          );
         }
       },
-      ( error ) => this.setState({ error: error.message }),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+      error => this.setState({ error: error.message }),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
   }
 
   listenForCoords() {
     this.dbRef.on('value', snapshotArr => {
       const coordsArr = [];
-      snapshotArr.forEach( child => {
+      snapshotArr.forEach(child => {
         coordsArr.push({
           name: child.val().name,
           _key: child.key,
@@ -80,18 +83,24 @@ export class AllPartners extends React.Component {
   }
 
   returnDistanceInMiles(lat1, lon1, lat2, lon2, unit) {
-    const radlat1 = Math.PI * lat1/180;
-    const radlat2 = Math.PI * lat2/180;
+    const radlat1 = (Math.PI * lat1) / 180;
+    const radlat2 = (Math.PI * lat2) / 180;
     const theta = lon1 - lon2;
-    const radtheta = Math.PI * theta/180;
-    let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    const radtheta = (Math.PI * theta) / 180;
+    let dist =
+      Math.sin(radlat1) * Math.sin(radlat2) +
+      Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
     dist = Math.acos(dist);
     dist *= 180 / Math.PI;
     dist *= 60 * 1.1515;
 
     //conversion for different units
-    if (unit === "K") { dist *= 1.609344 }
-    if (unit === "N") { dist *= 0.8684 }
+    if (unit === 'K') {
+      dist *= 1.609344;
+    }
+    if (unit === 'N') {
+      dist *= 0.8684;
+    }
 
     return dist;
   }
@@ -99,7 +108,7 @@ export class AllPartners extends React.Component {
   findNearbyPartner(coordsArr) {
     // filter by nearby and then sort by closest
     const distanceArr = [];
-    coordsArr.forEach( personObj => {
+    coordsArr.forEach(personObj => {
       personObj.distance = this.returnDistanceInMiles(
         personObj.lat,
         personObj.long,
@@ -110,7 +119,7 @@ export class AllPartners extends React.Component {
       distanceArr.push(personObj);
     });
 
-    distanceArr.sort( (a, b) => {
+    distanceArr.sort((a, b) => {
       return a.distance - b.distance;
     });
 
@@ -121,35 +130,31 @@ export class AllPartners extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    const { nearbyPeople } = this.state;
     return (
       <Container>
         <Content>
-        { !nearbyPeople.length ?
-          <Spinner color='blue' />
-          :
-          <List
-            dataArray={ nearbyPeople }
-            renderRow={ personObj =>
-              <ListItem>
-                <Thumbnail
-                  size={ 40 }
-                  source={ ImagePlaceholder }
-                />
-                <Body>
-                  <Text>{ personObj.name }</Text>
-                  <Text>{ personObj.distance }{' '}Mi</Text>
-                </Body>
-                <AllPartnersIcons
-                  navigate={ navigate }
-                  personObj={ personObj }
-                />
-              </ListItem>
-            }
-          />
-        }
+          {!this.state.nearbyPeople.length ? (
+            <Spinner color="blue" />
+          ) : (
+            <List
+              dataArray={this.state.nearbyPeople}
+              renderRow={personObj => (
+                <ListItem>
+                  <Thumbnail
+                    size={40}
+                    source={{ uri: 'https://placegoat.com/200/200' }}
+                  />
+                  <Body>
+                    <Text>{personObj.name}</Text>
+                    <Text>{personObj.distance} Mi</Text>
+                  </Body>
+                  <AllPartnersIcons navigate={navigate} personObj={personObj} />
+                </ListItem>
+              )}
+            />
+          )}
         </Content>
       </Container>
-    )
+    );
   }
 }

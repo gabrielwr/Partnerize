@@ -23,19 +23,19 @@ export const Row = styled.View`
   flex-direction: row;
   align-items: center;
   background-color: dodgerblue;
-  border-bottom-width: ${props => props.withBorder ? 1 : 0};
+  border-bottom-width: ${props => (props.withBorder ? 1 : 0)};
   border-color: white;
 `;
 
 export const Category = styled.Text`
-  fontWeight: bold;
+  font-weight: bold;
   width: 130;
-  marginLeft: 10;
+  margin-left: 10;
   color: white;
 `;
 
 export const CategoryValue = styled.Text`
-  paddingVertical: 20;
-  paddingLeft: 15;
+  padding-vertical: 20;
+  padding-left: 15;
   color: white;
 `;

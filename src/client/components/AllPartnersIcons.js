@@ -24,18 +24,18 @@ export class AllPartnersIcons extends React.Component {
       <View style={styles.view}>
         <Icon
           style={{ color: 'dodgerblue' }}
-          name='person'
-          onPress={ () => this.onUserPress(personObj) }
+          name="person"
+          onPress={() => this.onUserPress(personObj)}
         />
         <Icon
           style={{ color: 'dodgerblue' }}
-          name='chatbubbles'
-          onPress={ () => {
-            navigate('Message', { user: personObj })
+          name="chatbubbles"
+          onPress={() => {
+            navigate('Message', { user: personObj });
           }}
         />
       </View>
-    )
+    );
   }
 }
 
@@ -45,4 +45,4 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around'
   }
-})
+});

@@ -6,15 +6,14 @@ import {
   ImageWrapper,
   ProfileWrapper,
   ProfileImage,
-  Row,
+  Row
 } from './styled';
 
 import PlaceholderImage from '../../img/Gabe.png';
 
 class UserProfile extends Component {
-
   static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.state.params.user.Name}'s Profile`,
+    title: `${navigation.state.params.user.Name}'s Profile`
   });
 
   render() {
@@ -23,17 +22,18 @@ class UserProfile extends Component {
     return (
       <ProfileWrapper>
         <ImageWrapper>
-          <ProfileImage source={ PlaceholderImage }/>
+          <ProfileImage source={PlaceholderImage} />
         </ImageWrapper>
-        { profileInfo.length && profileInfo.map((key, idx) => {
-          const isLast = idx === profileInfo.length - 1;
-          return (
-            <Row key={ key } withBorder={!isLast}>
-              <Category> { key } </Category>
-              <CategoryValue>{ user[key] }</CategoryValue>
-            </Row>
-          );
-        })}
+        {profileInfo.length &&
+          profileInfo.map((key, idx) => {
+            const isLast = idx === profileInfo.length - 1;
+            return (
+              <Row key={key} withBorder={!isLast}>
+                <Category> {key} </Category>
+                <CategoryValue>{user[key]}</CategoryValue>
+              </Row>
+            );
+          })}
       </ProfileWrapper>
     );
   }

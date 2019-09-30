@@ -2,28 +2,28 @@ import styled from 'styled-components';
 
 export const HomeScreenWrapper = styled.View`
   flex: 1;
-  flexDirection: column;
-  justifyContent: center;
-  backgroundColor: lightskyblue;
-  alignItems: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: lightskyblue;
+  align-items: center;
 `;
 
 export const Content = styled.View`
-  flexDirection: column;
-  alignSelf: center;
+  flex-direction: column;
+  align-self: center;
 `;
 
 export const LogoWrapper = styled.View`
-  backgroundColor: transparent;
+  background-color: transparent;
   height: 500;
-  justifyContent: center;
+  justify-content: center;
 `;
 
 export const Image = styled.Image`
-  alignSelf: center;
+  align-self: center;
   height: 150;
   width: 150;
-  borderRadius: 10;
+  border-radius: 10;
 `;
 
 export const CenteredText = styled.Text`
